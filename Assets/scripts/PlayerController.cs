@@ -4,7 +4,7 @@ public class PlayerController : MonoBehaviour
 {
     //public float atkpt = 1f;
     private float speed = 8f;
-    private float hp = 5f;
+    public float hp = 999f;
     public GameObject bulletPrefab;
     public Transform firePoint;
     private float bulletSpeed = 10f;
@@ -14,16 +14,16 @@ public class PlayerController : MonoBehaviour
 
 
     private Animator animator;
-    private Rigidbody2D rigidbody;
-    private Collider2D collider;
+    private Rigidbody2D Rigidbody;
+    private Collider2D Collider;
     private Vector2 minBounds;
     private Vector2 maxBounds;
 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        Rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        collider = GetComponent<Collider2D>();    
+        Collider = GetComponent<Collider2D>();    
         SetCamPos();
     }
 
@@ -46,9 +46,9 @@ public class PlayerController : MonoBehaviour
         Vector2 moveDir = new Vector2(moveX, moveY).normalized * speed;
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            rigidbody.linearVelocity = moveDir*0.5f;
+            Rigidbody.linearVelocity = moveDir*0.3f;
         }
-        else { rigidbody.linearVelocity = moveDir; }
+        else { Rigidbody.linearVelocity = moveDir; }
        
 
         
@@ -75,8 +75,8 @@ public class PlayerController : MonoBehaviour
         if(hp <= 0)
         {
             animator.SetBool("isdie", true);
-            if (collider != null)
-                collider.enabled = false;
+            if (Collider != null)
+                Collider.enabled = false;
             speed = 0f;
             Destroy(gameObject, 1f);
             Debug.Log("게임 오버");
