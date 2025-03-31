@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     void UpdateHPText()
     {
         // PlayerController에서 현재 HP 값을 가져와서 텍스트에 반영
-        hp.text = "HP: " + playerController.HPText().ToString();
+        hp.text = "HP: " + playerController.HPOut().ToString();
     }
 
     void Update()

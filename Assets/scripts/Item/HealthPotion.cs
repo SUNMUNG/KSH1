@@ -10,6 +10,6 @@ public class HealthPotion : Item
         player.hp += healthAmount;
 
         // 증가한 HP 출력
-        Debug.Log("Player's hp increased by " + healthAmount + ". New HP: " + player.hp);
+        Debug.Log(healthAmount + "현재 Hp: " + player.hp);
     }
 }

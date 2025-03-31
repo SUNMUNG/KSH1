@@ -28,7 +28,5 @@ public class Item : MonoBehaviour
     // 아이템 사용 처리 (자식 클래스에서 오버라이드해야 합니다)
     protected virtual void UseItem(PlayerController player)
     {
-        // 기본적인 아이템 사용 처리 (오버라이드 필요)
-        Debug.Log("Item used");
     }
 }

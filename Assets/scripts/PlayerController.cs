@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //public float atkpt = 1f;
+    public int power = 0;
     private float speed = 8f;
     public float hp = 999f;
     public GameObject bulletPrefab;
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         ShootBullet();
     }
 
-    public float HPText()
+    public float HPOut()
     {
         return hp;
     }
@@ -61,10 +61,22 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) && Time.time > nextFireTime)
         {
-            nextFireTime = Time.time + fireRate;
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-            Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();
-            rbBullet.linearVelocity = Vector2.up * bulletSpeed;
+            switch (power) {
+                case 0:
+                    nextFireTime = Time.time + fireRate;
+                    GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+                    Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();
+                    rbBullet.linearVelocity = Vector2.up * bulletSpeed;
+                    break;
+                case 1:
+                    Debug.Log(power);
+                    break;
+                case 2:
+                    Debug.Log(power);
+                    break;
+            }
+
+            
            
         }
     }
@@ -85,7 +97,6 @@ public class PlayerController : MonoBehaviour
 
     void ClampPos()
     {
-        // Rigidbody 사용 시에도 위치 제한 필요
         float clampedX = Mathf.Clamp(transform.position.x, minBounds.x, maxBounds.x);
         float clampedY = Mathf.Clamp(transform.position.y, minBounds.y, maxBounds.y);
         transform.position = new Vector3(clampedX, clampedY, transform.position.z);
@@ -99,6 +110,11 @@ public class PlayerController : MonoBehaviour
         minBounds.y += 0.2f;
         minBounds.x += 0.2f;
         maxBounds.x -= 0.2f;
+    }
+
+    public void PowerUp(int duration)
+    {
+        power++;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
