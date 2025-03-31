@@ -4,15 +4,22 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public PlayerController playerController;
+    public int score=0;
     public Text hp;
+    public Text score_T;
     void UpdateHPText()
     {
-        // PlayerController에서 현재 HP 값을 가져와서 텍스트에 반영
         hp.text = "HP: " + playerController.HPOut().ToString();
+    }
+
+    void UpdateScore()
+    {
+        score_T.text = "Score : " + score.ToString();
     }
 
     void Update()
     {
         UpdateHPText();
+        UpdateScore();
     }
 }
