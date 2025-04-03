@@ -6,7 +6,6 @@ public class SpecialEnemy_wave : Enemy
     public int bulletsPerWave = 8;        // 각 파동에서 발사할 총알의 수 (원형 경로에 따라)
     public float waveRadius = 1f;         // 원형 경로의 반지름       
     public float rotationSpeed = 30f;     // 원형 패턴의 회전 속도 (도/초)
-
     private float waveTimer = 0f;         // 파동 타이머
     private float currentRotation = 0f;   // 원형 경로의 현재 회전 각도
 
@@ -51,11 +50,26 @@ public class SpecialEnemy_wave : Enemy
         }
     }
 
+    void EnemyMove()
+    {
+        transform.Translate(Vector3.right * speed * moveDirection * Time.deltaTime);
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "border")
+        {
+            Debug.Log(collision.gameObject.tag);
+            moveDirection *= -1;
+        }
+    }
     private void Update()
     {
         if (Hp > 0)
         {
             shoot();
+            EnemyMove();
         }
     }
 }

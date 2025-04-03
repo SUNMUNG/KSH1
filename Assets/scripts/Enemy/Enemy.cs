@@ -8,8 +8,9 @@ public class Enemy : MonoBehaviour
     public Transform firePoint;
     public float bulletSpeed = 2f;
     public float fireRate = 0.5f;
-    public float speed = 1f;
+    public float speed = 5f;
     public float nextFireTime = 0f;
+    public float moveDirection = 1f;
 
 
     private Animator animator;

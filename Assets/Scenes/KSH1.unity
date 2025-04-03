@@ -723,7 +723,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -53, y: 205.49998}
+  m_AnchoredPosition: {x: 0, y: 172}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &533476171
@@ -747,7 +747,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 2299943801bf8c541a38d0cb569e6778, type: 3}
     m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
@@ -1243,7 +1243,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 2299943801bf8c541a38d0cb569e6778, type: 3}
     m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
@@ -1280,7 +1280,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -258.12363, y: 185.69095}
+  m_AnchoredPosition: {x: -260.67, y: 152.19}
   m_SizeDelta: {x: 144.1528, y: 69.6181}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1330193604
@@ -2197,7 +2197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1054578501796372228, guid: 65a6434e14ea376439e926f46e4b70c3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1054578501796372228, guid: 65a6434e14ea376439e926f46e4b70c3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2231,14 +2231,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3807331704546515874, guid: 65a6434e14ea376439e926f46e4b70c3, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3971885872963188051, guid: 65a6434e14ea376439e926f46e4b70c3, type: 3}
       propertyPath: m_Name
       value: SpecialEnemy_Wave
       objectReference: {fileID: 0}
     - target: {fileID: 5734564664729923660, guid: 65a6434e14ea376439e926f46e4b70c3, type: 3}
+      propertyPath: Hp
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734564664729923660, guid: 65a6434e14ea376439e926f46e4b70c3, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 1030730617}
+    - target: {fileID: 5734564664729923660, guid: 65a6434e14ea376439e926f46e4b70c3, type: 3}
+      propertyPath: bulletsPerWave
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2473,7 +2485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6590007466210596570, guid: 8aca6de525b46824a8fe85313e8aa1d5, type: 3}
       propertyPath: m_Radius
-      value: 0.03
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: 6590007466210596570, guid: 8aca6de525b46824a8fe85313e8aa1d5, type: 3}
       propertyPath: m_Offset.x
