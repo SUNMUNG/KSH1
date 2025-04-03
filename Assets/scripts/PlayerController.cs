@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private float bulletSpeed = 10f;
     private float fireRate = 0.1f;
     private float nextFireTime = 0f;
-   
+    private Coroutine powerUpCoroutine;
 
 
     private Animator animator;
@@ -37,6 +38,34 @@ public class PlayerController : MonoBehaviour
     {
         return hp;
     }
+
+    public void PowerUp(int duration)
+    {
+        // power가 이미 증가한 상태라면 다시 시작하지 않도록 방지
+        if (powerUpCoroutine != null)
+        {
+            StopCoroutine(powerUpCoroutine); // 기존 코루틴 중단
+            Debug.Log("기존 파워업 코루틴 중단됨.");
+        }
+
+        // power 증가
+        power++;
+        Debug.Log("Power increased! Current power: " + power);
+
+        // 파워업 지속 시간을 관리하는 코루틴 시작
+        powerUpCoroutine = StartCoroutine(PowerUpDuration(duration));
+    }
+
+    private IEnumerator PowerUpDuration(int duration)
+    {
+        Debug.Log("PowerUp 시작. 지속 시간: " + duration + "초");
+
+        yield return new WaitForSeconds(duration); // 주어진 시간만큼 기다림
+
+        // 시간이 끝나면 power 초기화
+        power = 0;
+        Debug.Log("PowerUp 종료. Power 초기화됨. Current power: " + power);
+    }
     void PlayerMove()
     {
         float moveX = Input.GetAxisRaw("Horizontal");
@@ -61,23 +90,66 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) && Time.time > nextFireTime)
         {
-            switch (power) {
+            switch (power)
+            {
                 case 0:
+                    // 기본 총알 (1개만 발사)
                     nextFireTime = Time.time + fireRate;
-                    GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+                    GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 90));
                     Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();
                     rbBullet.linearVelocity = Vector2.up * bulletSpeed;
                     break;
+
                 case 1:
-                    Debug.Log(power);
+                    // power 1: 총알 3개 발사 (중앙 + 양옆)
+                    nextFireTime = Time.time + fireRate;
+
+                    // 중앙 총알 (직선 발사)
+                    GameObject bullet1 = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 90));
+                    Rigidbody2D rbBullet1 = bullet1.GetComponent<Rigidbody2D>();
+                    rbBullet1.linearVelocity = Vector2.up * bulletSpeed;
+
+                    // 왼쪽 총알 (직선 발사)
+                    GameObject bullet2 = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 90));
+                    Rigidbody2D rbBullet2 = bullet2.GetComponent<Rigidbody2D>();
+                    rbBullet2.linearVelocity = Vector2.up * bulletSpeed;
+
+                    // 오른쪽 총알 (직선 발사)
+                    GameObject bullet3 = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 90));
+                    Rigidbody2D rbBullet3 = bullet3.GetComponent<Rigidbody2D>();
+                    rbBullet3.linearVelocity = Vector2.up * bulletSpeed;
                     break;
+
                 case 2:
-                    Debug.Log(power);
+                    // power 2: 총알 5개 발사 (중앙 3개 + 양끝에 1개씩 앞쪽에 추가)
+                    nextFireTime = Time.time + fireRate;
+
+                    // 중앙 총알 (직선 발사)
+                    GameObject bullet4 = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 90));
+                    Rigidbody2D rbBullet4 = bullet4.GetComponent<Rigidbody2D>();
+                    rbBullet4.linearVelocity = Vector2.up * bulletSpeed;
+
+                    // 왼쪽 총알 (사선 발사)
+                    GameObject bullet5 = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 90));
+                    Rigidbody2D rbBullet5 = bullet5.GetComponent<Rigidbody2D>();
+                    rbBullet5.linearVelocity = new Vector2(-0.5f, 1f).normalized * bulletSpeed;
+
+                    // 오른쪽 총알 (사선 발사)
+                    GameObject bullet6 = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 90));
+                    Rigidbody2D rbBullet6 = bullet6.GetComponent<Rigidbody2D>();
+                    rbBullet6.linearVelocity = new Vector2(0.5f, 1f).normalized * bulletSpeed;
+
+                    // 왼쪽 끝 앞쪽 총알 (사선 발사)
+                    GameObject bullet7 = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 90));
+                    Rigidbody2D rbBullet7 = bullet7.GetComponent<Rigidbody2D>();
+                    rbBullet7.linearVelocity = new Vector2(-1f, 1.5f).normalized * bulletSpeed;
+
+                    // 오른쪽 끝 앞쪽 총알 (사선 발사)
+                    GameObject bullet8 = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 90));
+                    Rigidbody2D rbBullet8 = bullet8.GetComponent<Rigidbody2D>();
+                    rbBullet8.linearVelocity = new Vector2(1f, 1.5f).normalized * bulletSpeed;
                     break;
             }
-
-            
-           
         }
     }
     public void damaged(float damage)
@@ -112,10 +184,6 @@ public class PlayerController : MonoBehaviour
         maxBounds.x -= 0.2f;
     }
 
-    public void PowerUp(int duration)
-    {
-        power++;
-    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
