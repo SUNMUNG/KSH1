@@ -252,12 +252,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hp: 5
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 1015152902735199718, guid: 787864ccf3b1a9e499fc335099b91b0b, type: 3}
   firePoint: {fileID: 6270263680312448293}
   bulletSpeed: 1
   fireRate: 100
   speed: 1
   nextFireTime: 0
+  moveDirection: 1
+  reward_1: {fileID: 0}
   angleIncrement: 70
   numberOfBullets: 1
   randomAngleVariance: 5

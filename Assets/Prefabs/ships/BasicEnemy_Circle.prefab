@@ -163,12 +163,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hp: 5
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 1015152902735199718, guid: 787864ccf3b1a9e499fc335099b91b0b, type: 3}
   firePoint: {fileID: 2734059743251115660}
   bulletSpeed: 3
   fireRate: 0.3
   speed: 1
   nextFireTime: 0
+  moveDirection: 1
+  reward_1: {fileID: 0}
   bulletCount: 20
   radius: 5
   angleStep: 0

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public GameManager GameManager;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -14,6 +13,7 @@ public class Item : MonoBehaviour
             if (player != null)
             {
                 // 자식 클래스에서 UseItem 호출
+                Debug.Log("PlayerController detected. Using item.");
                 UseItem(player);
             }
             else

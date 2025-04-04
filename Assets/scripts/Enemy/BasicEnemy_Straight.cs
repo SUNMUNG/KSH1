@@ -14,11 +14,20 @@ public class BasicEnemy_Straight : Enemy
         }
     }
 
+    public override void move()
+    {
+        // Y축만 이동시키고 X축은 고정
+        transform.position += (Vector3)Vector2.down * speed * Time.deltaTime;
+
+    }
+
+
     void Update()
     {
         if(Hp > 0)
         {
             shoot();
+            move();
         }
        
     }

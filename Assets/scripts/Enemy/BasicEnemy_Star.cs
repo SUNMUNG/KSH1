@@ -4,6 +4,7 @@ public class BasicEnemy_Star : Enemy
 {
     public int numBullets = 8;  // 발사할 총알 개수
     public float angleStep = 45f; // 각도 간격 (360도 / numBullets)
+    public float randomAngleVariation = 10f; // 각도 랜덤 변형 범위 (±)
 
     public override void shoot()
     {
@@ -13,7 +14,9 @@ public class BasicEnemy_Star : Enemy
 
             for (int i = 0; i < numBullets; i++)
             {
-                float angle = i * angleStep;
+                // 원래의 각도에 랜덤 값을 추가
+                float angle = i * angleStep + Random.Range(-randomAngleVariation, randomAngleVariation);
+
                 Vector2 direction = new Vector2(Mathf.Sin(Mathf.Deg2Rad * angle), Mathf.Cos(Mathf.Deg2Rad * angle));
 
                 // 총알 생성
@@ -31,10 +34,9 @@ public class BasicEnemy_Star : Enemy
 
     void Update()
     {
-        if(Hp > 0)
+        if (Hp > 0)
         {
             shoot();
         }
-        
     }
 }

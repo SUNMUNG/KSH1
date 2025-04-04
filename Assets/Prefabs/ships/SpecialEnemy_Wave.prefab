@@ -190,15 +190,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hp: 20
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 1015152902735199718, guid: 787864ccf3b1a9e499fc335099b91b0b, type: 3}
   firePoint: {fileID: 5873860338099433576}
   bulletSpeed: 2
   fireRate: 0.5
   speed: 1
   nextFireTime: 0
   moveDirection: 1
+  reward_1: {fileID: 0}
   waveFrequency: 0.5
-  bulletsPerWave: 20
+  bulletsPerWave: 30
   waveRadius: 1
   rotationSpeed: 1000
 --- !u!95 &8109748023539795876

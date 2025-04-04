@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7792495399492680394}
   - component: {fileID: -8259391315964676125}
   - component: {fileID: -5670292679055575503}
+  - component: {fileID: 2689189058478099576}
   m_Layer: 0
   m_Name: BasicEnemy_Straight
   m_TagString: Enemy
@@ -178,6 +179,8 @@ MonoBehaviour:
   fireRate: 0.3
   speed: 1
   nextFireTime: 0
+  moveDirection: 1
+  reward_1: {fileID: 1495729082237245837, guid: 6d6d10e7947986148a92380b7949be10, type: 3}
 --- !u!95 &-5670292679055575503
 Animator:
   serializedVersion: 7
@@ -200,6 +203,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!50 &2689189058478099576
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2863234306878662411}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3738966331554644202
 GameObject:
   m_ObjectHideFlags: 0
