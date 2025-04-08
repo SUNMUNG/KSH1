@@ -13,11 +13,11 @@ public class UIManager : MonoBehaviour
     public void ExitGame()
     {
         // 게임 종료
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;  // 에디터에서 실행 중일 때 게임을 종료
-#else
+
+        EditorApplication.isPlaying = false;  // 에디터에서 실행 중일 때 게임을 종료
+
             Application.Quit();  // 빌드된 게임에서 게임 종료
-#endif
+
     }
     public void Returntomenu()
     {
@@ -49,6 +49,19 @@ public class UIManager : MonoBehaviour
         {
             Debug.LogWarning("StageMenu 오브젝트를 찾을 수 없습니다!");
         }
+    }
+
+    public void PauseGame()
+    {
+        Debug.Log("게임을 일시중지합니다");
+        Time.timeScale = 0f;
+       // EditorApplication.isPaused = true;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        Debug.Log("게임을 재개합니다.");
     }
     public void StageMenuClose()
     {
