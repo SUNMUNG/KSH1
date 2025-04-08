@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7302483119291094124}
   - component: {fileID: 8496182872643782581}
   - component: {fileID: 1023028323071111624}
+  - component: {fileID: 6806822798295687551}
   m_Layer: 0
   m_Name: Item_Score_10000
   m_TagString: Item
@@ -138,4 +139,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553a7704aeb16194dbe03fa5ca8aac42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManager: {fileID: 0}
+--- !u!50 &6806822798295687551
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20493978551434615}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

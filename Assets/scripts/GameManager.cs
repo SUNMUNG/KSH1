@@ -12,10 +12,13 @@ public class GameManager : MonoBehaviour
     public GameObject Stage1_enemyPrefab2;
     public GameObject Stage1_enemyPrefab3; // 적 프리팹
     public float spawnInterval = 3f; // 적 스폰 간격
-    public TMP_Text gameOverText; // 게임 오버 텍스트 (TextMesh Pro 사용)
+    public TMP_Text gameOverText; // 게임 오버 텍스트
     private float spawnY = 6f;
     private float nextSpawnTime;
-    private int waveCount = 0; // 웨이브 카운트 추가 (웨이브마다 난이도 변화)
+    private int waveCount = 0; // 웨이브 카운트 추가
+    private int enemiesSpawnedInWave = 0; // 현재 웨이브에 스폰된 적의 수
+    private int enemiesInWave = 10; // 한 웨이브마다 스폰할 적의 수
+    private bool isStageClear = false; // 스테이지 클리어 확인용
 
     void UpdateHPText()
     {
@@ -30,11 +33,15 @@ public class GameManager : MonoBehaviour
     // 적 스폰 메서드
     void SpawnEnemy_Stage1()
     {
+        if (isStageClear==true)
+        {
+            return;
+        }
         if (Time.time >= nextSpawnTime)
         {
             GameObject enemyPrefab = GetRandomEnemyPrefab(); // 랜덤으로 적 프리팹 선택
 
-            if (enemyPrefab != null)
+            if (enemyPrefab != null && enemiesSpawnedInWave < enemiesInWave)
             {
                 // 랜덤 X 좌표 계산
                 float randomX = Random.Range(-7f, 7f); // X 좌표 랜덤
@@ -48,14 +55,21 @@ public class GameManager : MonoBehaviour
                 // 스폰된 적의 위치를 강제로 고정
                 enemy.transform.position = new Vector2(randomX, spawnY); // 위치를 강제로 설정
                 Debug.Log("Spawned Enemy at position: " + enemy.transform.position);
+
+                enemiesSpawnedInWave++; // 한 웨이브에서 스폰된 적의 수 증가
             }
-            else
+            else if (enemiesSpawnedInWave >= enemiesInWave)
             {
-                Debug.LogWarning("No enemy prefab assigned!");
+                // 한 웨이브에서 적이 모두 스폰되었을 경우
+                Debug.Log("Wave " + waveCount + " Completed!");
+                enemiesSpawnedInWave = 0; // 웨이브 카운트 리셋
+                waveCount++; // 웨이브 증가
+                Debug.Log("Wave Count: " + waveCount);
             }
             nextSpawnTime = Time.time + spawnInterval; // 적 스폰 간격 설정
         }
     }
+
 
     // 랜덤으로 적 프리팹을 선택하는 메서드
     GameObject GetRandomEnemyPrefab()
@@ -79,6 +93,15 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0; // 게임 멈추기
         }
     }
+    // 모든 적이 죽었는지 확인하고, 스테이지 클리어 메시지 출력
+    void CheckStageClear()
+    {
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && waveCount == 3) // 적이 하나도 남지 않았을 때
+        {
+            isStageClear = true;
+            Debug.Log("Stage Clear!"); // 디버그 로그로 스테이지 클리어 출력
+        }
+    }
 
     void Update()
     {
@@ -88,8 +111,7 @@ public class GameManager : MonoBehaviour
 
         // 게임 오버 체크
         CheckGameOver();
-
-        // 웨이브 진행
-        waveCount++; // 계속 진행되며 웨이브 증가
+        // 모든 적이 죽었는지 확인 (스테이지 클리어 체크)
+        CheckStageClear();
     }
 }

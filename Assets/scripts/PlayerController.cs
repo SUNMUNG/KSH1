@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     public int power = 0;
     private float speed = 8f;
-    public float hp = 999f;
+    public float hp = 6f;
     public GameObject bulletPrefab;
     public Transform firePoint;
     private float bulletSpeed = 10f;
@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private float nextFireTime = 0f;
     private Coroutine powerUpCoroutine;
 
-
+    private SpriteRenderer spriteRenderer;
     private Animator animator;
     private Rigidbody2D Rigidbody;
     private Collider2D Collider;
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         Collider = GetComponent<Collider2D>();    
+        spriteRenderer = GetComponent<SpriteRenderer>();
         SetCamPos();
     }
 
@@ -155,6 +156,14 @@ public class PlayerController : MonoBehaviour
     public void damaged(float damage)
     {
         hp -= damage;
+        if (Collider != null)
+        {
+            Collider.enabled = false;
+            Debug.Log("피격확인 무적시간 시작");
+            StartCoroutine(BlinkSprite(2f));
+            StartCoroutine(EnableColliderAfterDelay(2f));
+        }
+            
 
         if(hp <= 0)
         {
@@ -165,6 +174,27 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject, 1f);
             Debug.Log("게임 오버");
         }
+    }
+    private IEnumerator EnableColliderAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);  // 지정된 시간만큼 대기
+        Collider.enabled = true;        // 콜라이더를 다시 활성화
+        Debug.Log("무적시간 종료");
+    }
+    private IEnumerator BlinkSprite(float duration)
+    {
+        float elapsedTime = 0f;
+        bool isVisible = true;
+
+        while (elapsedTime < duration)
+        {
+            spriteRenderer.enabled = isVisible; // 스프라이트 표시/숨기기
+            isVisible = !isVisible; // 가시성 반전
+            elapsedTime += 0.1f; // 0.1초마다 토글 (깜빡임 속도 조정 가능)
+            yield return new WaitForSeconds(0.1f); // 0.1초 대기
+        }
+
+        spriteRenderer.enabled = true; // 마지막에는 스프라이트가 보이도록 설정
     }
 
     void ClampPos()

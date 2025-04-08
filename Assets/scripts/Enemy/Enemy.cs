@@ -58,16 +58,6 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Reward item created successfully.");
 
-            // 만약 PlayerController가 아이템과 충돌한 상태에서 사용할 경우, 그와의 연결을 다시 체크
-            Item_Score_100 itemScript = reward1.GetComponent<Item_Score_100>();
-            if (itemScript != null)
-            {
-                Debug.Log("Item_Score_100 script found.");
-            }
-            else
-            {
-                Debug.LogError("Item_Score_100 script not found on reward item.");
-            }
         }
     }
 

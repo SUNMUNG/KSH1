@@ -6,6 +6,16 @@ public class BasicEnemy_Star : Enemy
     public float angleStep = 45f; // 각도 간격 (360도 / numBullets)
     public float randomAngleVariation = 10f; // 각도 랜덤 변형 범위 (±)
 
+
+    public override void move()
+    {
+        // Y 위치가 4에 도달할 때까지 내려옵니다.
+        if (transform.position.y > 4f)
+        {
+            // Y축으로 내려오기
+            transform.position += Vector3.down * speed * Time.deltaTime;
+        }
+    }
     public override void shoot()
     {
         if (Time.time >= nextFireTime)
@@ -37,6 +47,7 @@ public class BasicEnemy_Star : Enemy
         if (Hp > 0)
         {
             shoot();
+            move();
         }
     }
 }

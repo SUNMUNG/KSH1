@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    private float speed = 1f;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -24,6 +25,21 @@ public class Item : MonoBehaviour
             // 아이템 삭제
             Destroy(gameObject);
         }
+        else if(collision.gameObject.tag== "bulletborder")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void movedown()
+    {
+        // Y축만 이동시키고 X축은 고정
+        transform.position += (Vector3)Vector2.down * speed * Time.deltaTime;
+    }
+
+    private void Update()
+    {
+        movedown();
     }
 
     // 아이템 사용 처리 (자식 클래스에서 오버라이드해야 합니다)

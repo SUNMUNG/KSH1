@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8876824811945761710}
   - component: {fileID: 465379109937235305}
   - component: {fileID: 5221408356516258423}
+  - component: {fileID: -8585575382149722709}
   m_Layer: 0
   m_Name: PowerUpPotion
   m_TagString: Item
@@ -139,3 +140,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 60
+--- !u!50 &-8585575382149722709
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719039008919548291}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
