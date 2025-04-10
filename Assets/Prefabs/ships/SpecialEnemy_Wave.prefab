@@ -197,7 +197,9 @@ MonoBehaviour:
   speed: 1
   nextFireTime: 0
   moveDirection: 1
-  reward_1: {fileID: 0}
+  reward_1: {fileID: 20493978551434615, guid: 32ac0065c72a4b849960250c7d460dad, type: 3}
+  reward_2: {fileID: 674168338714940340, guid: 4ecb9e7fb8fc61a4ba9c5f42bec36aaa, type: 3}
+  reward_3: {fileID: 1719039008919548291, guid: ac5ab3fa9bc0403469bcbb3281712ac9, type: 3}
   waveFrequency: 0.5
   bulletsPerWave: 30
   waveRadius: 1

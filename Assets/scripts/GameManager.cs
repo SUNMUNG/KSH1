@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject Stage1_enemyPrefab3; // 적 프리팹
     public float spawnInterval = 3f; // 적 스폰 간격
     public TMP_Text gameOverText; // 게임 오버 텍스트
+    public GameObject gameClearUI;
     private float spawnY = 6f;
     private float nextSpawnTime;
     private int waveCount = 0; // 웨이브 카운트 추가
@@ -99,7 +100,8 @@ public class GameManager : MonoBehaviour
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && waveCount == 3) // 적이 하나도 남지 않았을 때
         {
             isStageClear = true;
-            Debug.Log("Stage Clear!"); // 디버그 로그로 스테이지 클리어 출력
+            gameClearUI.gameObject.SetActive(true);
+            Time.timeScale = 0; // 게임 멈추기
         }
     }
 

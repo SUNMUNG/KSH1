@@ -6,10 +6,10 @@ public class Item : MonoBehaviour
     private float speed = 1f;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("ItemHitBox"))
         {
             // 플레이어에서 PlayerController 컴포넌트를 가져옵니다
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            PlayerController player = collision.gameObject.GetComponentInParent<PlayerController>();
 
             if (player != null)
             {

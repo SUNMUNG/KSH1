@@ -171,7 +171,9 @@ MonoBehaviour:
   speed: 1
   nextFireTime: 0
   moveDirection: 1
-  reward_1: {fileID: 0}
+  reward_1: {fileID: 2235830060954345941, guid: 0bc8a4096dd96b74b9fdd5bea2724e7d, type: 3}
+  reward_2: {fileID: 674168338714940340, guid: 4ecb9e7fb8fc61a4ba9c5f42bec36aaa, type: 3}
+  reward_3: {fileID: 1719039008919548291, guid: ac5ab3fa9bc0403469bcbb3281712ac9, type: 3}
   bulletCount: 20
   radius: 5
   angleStep: 0

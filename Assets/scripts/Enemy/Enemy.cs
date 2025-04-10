@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     public float moveDirection = 1f;
 
     public GameObject reward_1;
+    public GameObject reward_2;
+    public GameObject reward_3;
     private Animator animator;
     private Collider2D enemyCollider;
     public void Start()
@@ -49,15 +51,29 @@ public class Enemy : MonoBehaviour
 
     public virtual void move() { }
 
-    public virtual void reward() {
-        // 아이템을 생성하는 위치
+    public virtual void reward()
+    {
+        // 기본 보상은 항상 생성
         GameObject reward1 = Instantiate(reward_1, transform.position, Quaternion.identity);
-
-        // 아이템이 생성되면, PlayerController가 제대로 연결되었는지 확인
         if (reward1 != null)
         {
-            Debug.Log("Reward item created successfully.");
+            Debug.Log("Reward 1 created successfully.");
+        }
 
+        // 확률로 reward_2 생성 (예: 30% 확률)
+        float chance2 = Random.Range(0f, 1f);
+        if (chance2 <= 0.3f)
+        {
+            GameObject reward2 = Instantiate(reward_2, transform.position + new Vector3(0.5f, 0, 0), Quaternion.identity);
+            Debug.Log("Reward 2 created!");
+        }
+
+        // 확률로 reward_3 생성 (예: 15% 확률)
+        float chance3 = Random.Range(0f, 1f);
+        if (chance3 <= 0.15f)
+        {
+            GameObject reward3 = Instantiate(reward_3, transform.position + new Vector3(-0.5f, 0, 0), Quaternion.identity);
+            Debug.Log("Reward 3 created!");
         }
     }
 

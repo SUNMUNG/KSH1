@@ -181,6 +181,8 @@ MonoBehaviour:
   nextFireTime: 0
   moveDirection: 1
   reward_1: {fileID: 1495729082237245837, guid: 6d6d10e7947986148a92380b7949be10, type: 3}
+  reward_2: {fileID: 674168338714940340, guid: 4ecb9e7fb8fc61a4ba9c5f42bec36aaa, type: 3}
+  reward_3: {fileID: 1719039008919548291, guid: ac5ab3fa9bc0403469bcbb3281712ac9, type: 3}
 --- !u!95 &-5670292679055575503
 Animator:
   serializedVersion: 7
