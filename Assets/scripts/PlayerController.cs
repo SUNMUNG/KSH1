@@ -6,12 +6,14 @@ public class PlayerController : MonoBehaviour
     public int power = 0;
     private float speed = 7f;
     public float hp = 6f;
+    public float maxHP = 6f;
     public GameObject bulletPrefab;
     public Transform firePoint;
     private float bulletSpeed = 10f;
     private float fireRate = 0.1f;
     private float nextFireTime = 0f;
     private Coroutine powerUpCoroutine;
+    public int Hitnumber=0;
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
@@ -175,6 +177,7 @@ public class PlayerController : MonoBehaviour
     public void damaged(float damage)
     {
         hp -= damage;
+        Hitnumber++;
         if (Collider != null)
         {
             Collider.enabled = false;

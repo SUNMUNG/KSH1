@@ -21,11 +21,6 @@ public class GameManager : MonoBehaviour
     private int enemiesInWave = 10; // 한 웨이브마다 스폰할 적의 수
     private bool isStageClear = false; // 스테이지 클리어 확인용
 
-    void UpdateHPText()
-    {
-        hp.text = "HP: " + playerController.HPOut().ToString();
-    }
-
     void UpdateScore()
     {
         score_T.text = "Score : " + score.ToString();
@@ -107,7 +102,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        UpdateHPText();
         UpdateScore();
         SpawnEnemy_Stage1(); // 적 스폰
 

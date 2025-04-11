@@ -6,10 +6,17 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public GameObject stageMenu;
-    public Image[] heartImages;  // 하트 이미지들을 담을 배열
+    public GameObject settingMenu;
+    public Image[] heartImages; // 하트 이미지들을 담을 배열
+    public Image[] starImages;
     public Sprite fullHeart;     // 꽉 찬 하트 이미지
-    public Sprite emptyHeart;    // 빈 하트 이미지
-    public PlayerController playerController;  // PlayerController를 참조
+    public Sprite emptyHeart;  // 빈 하트 이미지
+    public Sprite fullStar;
+    public Sprite emptyStar;
+    public PlayerController playerController; // PlayerController를 참조
+    public GameManager gameManager;
+
+   
     public void ExitGame()
     {
         // 게임 종료
@@ -21,6 +28,7 @@ public class UIManager : MonoBehaviour
     }
     public void Returntomenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
     public void PlayStageStart(string name)
@@ -51,17 +59,42 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void RetryStage()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
+        Debug.Log("해당 스테이지를 재시작합니다.");
+    }
+
     public void PauseGame()
     {
         Debug.Log("게임을 일시중지합니다");
         Time.timeScale = 0f;
        // EditorApplication.isPaused = true;
     }
+    public void SettingPauseGame()
+    {
+        PauseGame();
+        if (settingMenu != null)
+        {
+            settingMenu.SetActive(true);
+        }
+        else Debug.LogWarning("settingMenu 오브젝트를 찾을 수 없습니다!");
+    }
 
     public void ResumeGame()
     {
         Time.timeScale = 1f;
         Debug.Log("게임을 재개합니다.");
+    }
+    public void SettingResumeGame()
+    {
+        ResumeGame();
+        if (settingMenu != null)
+        {
+            settingMenu.SetActive(false);
+        }
+        else Debug.LogWarning("settingMenu 오브젝트를 찾을 수 없습니다!");
     }
     public void StageMenuClose()
     {
@@ -83,16 +116,24 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (Time.timeScale == 1f)
+            {
+                SettingPauseGame();
+             } else SettingResumeGame();
+        }
         // HP 값이 변경될 때마다 하트를 업데이트
         UpdateHearts();
+        EndGameResult();
     }
 
     // 하트 이미지를 현재 HP에 맞게 업데이트하는 메소드
     private void UpdateHearts()
     {
-        if (playerController == null) return;  // PlayerController가 없으면 업데이트하지 않음
+        if (playerController == null) return;  
 
-        float currentHP = playerController.hp;  // PlayerController에서 HP 값 가져오기
+        float currentHP = playerController.hp ;  // PlayerController에서 HP 값 가져오기
 
         for (int i = 0; i < heartImages.Length; i++)
         {
@@ -106,4 +147,43 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+
+    private void EndGameResult()
+    {
+        if (gameManager == null)return;  // PlayerController가 없으면 업데이트하지 않음
+
+        float currentScore = gameManager.score;  // PlayerController에서 HP 값 가져오기
+
+        if (currentScore >= 20000 && playerController.Hitnumber <=5)
+        {
+            for(int i = 0; i < starImages.Length; i++)
+            {
+                starImages[i].sprite = fullStar;
+            }
+        }
+        else if (currentScore >=15000 && playerController.Hitnumber <= 10)
+        {
+            for (int i = 0; i < starImages.Length-1; i++)
+            {
+                starImages[i].sprite = fullStar;
+            }
+            starImages[2].sprite=emptyStar;
+        }
+        else if (currentScore >=10000 && playerController.Hitnumber <= 15)
+        {
+            starImages[0].sprite = fullStar;
+            for (int i = 1; i < starImages.Length; i++)
+            {
+                starImages[i].sprite = emptyStar;
+            }  
+        }
+        else
+        {
+            for (int i = 0; i < starImages.Length; i++)
+            {
+                starImages[i].sprite = emptyStar;
+            }
+        }
+    }
+    
 }
