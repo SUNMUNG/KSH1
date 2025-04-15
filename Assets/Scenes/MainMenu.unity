@@ -590,6 +590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageMenu: {fileID: 1342480112}
+  settingMenu: {fileID: 0}
   heartImages: []
   starImages: []
   fullHeart: {fileID: 0}
@@ -2748,7 +2749,7 @@ GameObject:
   - component: {fileID: 1440121596}
   - component: {fileID: 1440121595}
   m_Layer: 5
-  m_Name: Stage1
+  m_Name: KSH1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

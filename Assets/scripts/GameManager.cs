@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public float spawnInterval = 3f; // 적 스폰 간격
     public TMP_Text gameOverText; // 게임 오버 텍스트
     public GameObject gameClearUI;
+    public int Starcount;
     private float spawnY = 6f;
     private float nextSpawnTime;
     private int waveCount = 0; // 웨이브 카운트 추가
@@ -97,6 +98,26 @@ public class GameManager : MonoBehaviour
             isStageClear = true;
             gameClearUI.gameObject.SetActive(true);
             Time.timeScale = 0; // 게임 멈추기
+            CheckScoreResult();
+        }
+    }
+    void CheckScoreResult()
+    {
+        if (score >= 20000 && playerController.Hitnumber <= 5)
+        {
+            Starcount = 3;
+        }
+        else if (score >= 15000 && playerController.Hitnumber <= 10)
+        {
+            Starcount = 2;
+        }
+        else if (score >= 10000 && playerController.Hitnumber <= 15)
+        {
+            Starcount = 1;
+        }
+        else
+        {
+            Starcount = 0;
         }
     }
 

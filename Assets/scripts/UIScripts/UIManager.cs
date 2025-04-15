@@ -150,40 +150,19 @@ public class UIManager : MonoBehaviour
 
     private void EndGameResult()
     {
-        if (gameManager == null)return;  // PlayerController가 없으면 업데이트하지 않음
+        if (gameManager == null)return;  
 
-        float currentScore = gameManager.score;  // PlayerController에서 HP 값 가져오기
+        int Starcount = gameManager.Starcount;  
 
-        if (currentScore >= 20000 && playerController.Hitnumber <=5)
+        for(int i = 0; i < starImages.Length; i++)
         {
-            for(int i = 0; i < starImages.Length; i++)
+            if (i < Starcount)
             {
                 starImages[i].sprite = fullStar;
             }
         }
-        else if (currentScore >=15000 && playerController.Hitnumber <= 10)
-        {
-            for (int i = 0; i < starImages.Length-1; i++)
-            {
-                starImages[i].sprite = fullStar;
-            }
-            starImages[2].sprite=emptyStar;
-        }
-        else if (currentScore >=10000 && playerController.Hitnumber <= 15)
-        {
-            starImages[0].sprite = fullStar;
-            for (int i = 1; i < starImages.Length; i++)
-            {
-                starImages[i].sprite = emptyStar;
-            }  
-        }
-        else
-        {
-            for (int i = 0; i < starImages.Length; i++)
-            {
-                starImages[i].sprite = emptyStar;
-            }
-        }
+
+        
     }
     
 }
