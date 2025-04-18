@@ -10,6 +10,7 @@ public class SpecialEnemy_Spiral : Enemy
 
     public override void shoot()
     {
+        if (isBulletBlocked) return;
         for (int i = 0; i < numberOfBullets; i++)
         {
             // 랜덤한 각도 추가 (원래 각도에 ±범위만큼 변화를 줌)
@@ -18,6 +19,7 @@ public class SpecialEnemy_Spiral : Enemy
 
             // 총알 생성
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+            bullet.transform.localScale = new Vector3(bulletsize, bulletsize, bulletsize);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
             if (rb != null)

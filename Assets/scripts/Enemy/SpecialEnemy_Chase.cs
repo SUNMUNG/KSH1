@@ -47,6 +47,7 @@ public class SpecialEnemy_Chase : Enemy
     }
     public override void shoot()
     {
+        if (isBulletBlocked) return;
         player = GameObject.Find("Player");
         if (Time.time > nextFireTime)
         {
@@ -56,7 +57,7 @@ public class SpecialEnemy_Chase : Enemy
             Vector3 playerPosition = player.transform.position;
 
             // 총알 발사 (두세 개의 총알 발사)
-            int bulletCount = 2;
+            int bulletCount = 1;
 
             for (int i = 0; i < bulletCount; i++)
             {
@@ -74,6 +75,7 @@ public class SpecialEnemy_Chase : Enemy
 
                 // 총알 발사
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+                bullet.transform.localScale = new Vector3(bulletsize, bulletsize, bulletsize);
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
                 // 총알의 속도 적용

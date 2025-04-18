@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;  // TextMesh Pro를 사용하기 위한 네임스페이스 추가
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,13 +12,17 @@ public class GameManager : MonoBehaviour
     public GameObject Stage1_enemyPrefab1;
     public GameObject Stage1_enemyPrefab2;
     public GameObject Stage1_enemyPrefab3; // 적 프리팹
+    public GameObject Stage1_enemyPrefab4;
+    public GameObject Stage1_enemyPrefab5;
+    public GameObject Stage1_enemyPrefab6;
+    public GameObject Stage1_enemyPrefab7;
     public float spawnInterval = 3f; // 적 스폰 간격
     public TMP_Text gameOverText; // 게임 오버 텍스트
     public GameObject gameClearUI;
     public int Starcount;
     private float spawnY = 6f;
     private float nextSpawnTime;
-    private int waveCount = 0; // 웨이브 카운트 추가
+    public int waveCount = 0; // 웨이브 카운트 추가
     private int enemiesSpawnedInWave = 0; // 현재 웨이브에 스폰된 적의 수
     private int enemiesInWave = 10; // 한 웨이브마다 스폰할 적의 수
     private bool isStageClear = false; // 스테이지 클리어 확인용
@@ -65,6 +70,74 @@ public class GameManager : MonoBehaviour
             }
             nextSpawnTime = Time.time + spawnInterval; // 적 스폰 간격 설정
         }
+    }
+    void SpawnEnemy_Stage2()
+    {
+        if (isStageClear) return;
+
+        if (Time.time >= nextSpawnTime)
+        {
+            // 적 프리팹 배열
+            GameObject[] enemyPrefabs = new GameObject[]
+            {
+            Stage1_enemyPrefab3, Stage1_enemyPrefab6, Stage1_enemyPrefab7
+            };
+
+            // 7번 프리팹이 이미 존재하는지 체크
+            bool isPrefab7Exists = GameObject.Find("BasicEnemy_Circle(Clone)") != null;
+
+            // 7번 프리팹이 존재하면 다른 프리팹 선택
+            GameObject selectedPrefab;
+            if (isPrefab7Exists)
+            {
+                // "Stage1_enemyPrefab7"이 이미 존재하면, 나머지 프리팹 중에서 랜덤 선택
+                selectedPrefab = enemyPrefabs[Random.Range(0, 2)];
+                Debug.Log("프리팹이 이미 존재합니다.");// Stage1_enemyPrefab3, Stage1_enemyPrefab6 중 하나
+            }
+            else
+            {
+                // 7번 프리팹을 포함한 모든 프리팹 중에서 랜덤 선택
+                selectedPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+                Debug.Log("프리팹이 이미 존재하지않습니다.");
+            }
+
+            // 랜덤 X 좌표
+            float randomX = Random.Range(-6f, 6f);
+            Vector2 spawnPosition = new Vector2(randomX, spawnY);
+
+            // 생성
+            GameObject enemy = Instantiate(selectedPrefab, spawnPosition, Quaternion.Euler(180, 0, 0));
+
+            // movementPattern 랜덤 지정
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            if (enemyScript != null)
+            {
+                int patternIndex = Random.Range(0, 4); // 0~3
+                enemyScript.movementPattern = (Enemy.MovementPattern)patternIndex;
+
+                // 탄막도 shoot 오버라이드해서 사용 가능
+                enemyScript.InvokeRepeating("shoot", 1f, enemyScript.fireRate);
+            }
+
+            enemiesSpawnedInWave++;
+
+            if (enemiesSpawnedInWave >= enemiesInWave)
+            {
+                Debug.Log("Wave " + waveCount + " Completed!");
+                enemiesSpawnedInWave = 0;
+                waveCount++;
+            }
+
+            nextSpawnTime = Time.time + spawnInterval;
+        }
+    }
+    void SpawnEnemy_Stage3()
+    {
+
+    }
+    void SpawnEnemy_Stage4()
+    {
+
     }
 
 
@@ -120,12 +193,32 @@ public class GameManager : MonoBehaviour
             Starcount = 0;
         }
     }
+    void StageSpawnSelect()
+    {
+        if (SceneManager.GetActiveScene().name == "Stage1")
+        {
+            SpawnEnemy_Stage1(); // 적 스폰
+        }
+        else if (SceneManager.GetActiveScene().name == "Stage2")
+        {
+            SpawnEnemy_Stage2(); // 적 스폰
+        }
+        else if (SceneManager.GetActiveScene().name == "Stage3")
+        {
+            SpawnEnemy_Stage3(); // 적 스폰
+        }
+        else if (SceneManager.GetActiveScene().name == "Stage4")
+        {
+            SpawnEnemy_Stage4(); // 적 스폰
+        }
+        else { Debug.Log("해당하는 스테이지가 없습니다"); }
+    }
+
 
     void Update()
     {
+        StageSpawnSelect();
         UpdateScore();
-        SpawnEnemy_Stage1(); // 적 스폰
-
         // 게임 오버 체크
         CheckGameOver();
         // 모든 적이 죽었는지 확인 (스테이지 클리어 체크)

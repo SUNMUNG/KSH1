@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 8d196f54f7d9e7e49baba23cdf305cc5
   - enabled: 1
-    path: Assets/Scenes/KSH1.unity
+    path: Assets/Scenes/Stage1.unity
     guid: 194541ef7b179b74983b7f26bde4d7ee
   - enabled: 1
     path: Assets/Scenes/SettingMenu.unity
@@ -17,6 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage1.unity
     guid: 3c57cc147c5cde5428cb48d4e878c642
+  - enabled: 1
+    path: Assets/Scenes/Stage2.unity
+    guid: 9cf094d6e9d8dc249b865a96575f97b0
+  - enabled: 1
+    path: Assets/Scenes/Stage3.unity
+    guid: bb1258044ef733b409f5096a4ad8bc7a
+  - enabled: 1
+    path: Assets/Scenes/Stage4.unity
+    guid: d8d79ccb43459c04cac62e21c3ba5ae1
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

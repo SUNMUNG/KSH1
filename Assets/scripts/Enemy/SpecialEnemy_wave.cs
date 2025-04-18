@@ -11,6 +11,7 @@ public class SpecialEnemy_wave : Enemy
 
     public override void shoot()
     {
+        if (isBulletBlocked) return;
         // 파동 타이머 갱신
         waveTimer += Time.deltaTime;
 
@@ -36,6 +37,7 @@ public class SpecialEnemy_wave : Enemy
 
                 // 총알 생성
                 GameObject bullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
+                bullet.transform.localScale = new Vector3(bulletsize, bulletsize, bulletsize);
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
                 if (rb != null)

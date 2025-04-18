@@ -8,12 +8,14 @@ public class BasicEnemy_Spread: Enemy
 
     public override void shoot()
     {
+        if (isBulletBlocked) return;
         if (Time.time >= nextFireTime)
         {
             nextFireTime = Time.time + fireRate;
 
             // 총알 생성
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+            bullet.transform.localScale = new Vector3(bulletsize, bulletsize, bulletsize);
 
             // 파동 효과를 위한 X축 위치 계산
             float waveOffset = Mathf.Sin(Time.time * waveFrequency) * waveAmplitude;
@@ -26,11 +28,20 @@ public class BasicEnemy_Spread: Enemy
             }
         }
     }
+    public override void move()
+    {
+        if (transform.position.y > 4f)
+        {
+            // Y축으로 내려오기
+            transform.position += Vector3.down * speed * Time.deltaTime;
+        }
+    }
 
     void Update()
     {
         if (Hp > 0) {
             shoot();
+            move();
         }
         
     }

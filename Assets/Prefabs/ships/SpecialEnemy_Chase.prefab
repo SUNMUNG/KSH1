@@ -159,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp: 3
   bulletPrefab: {fileID: 1015152902735199718, guid: 787864ccf3b1a9e499fc335099b91b0b, type: 3}
+  bulletsize: 3
   firePoint: {fileID: 9034588029132523488}
   bulletSpeed: 3
   fireRate: 0.3
@@ -168,6 +169,8 @@ MonoBehaviour:
   reward_1: {fileID: 1495729082237245837, guid: 6d6d10e7947986148a92380b7949be10, type: 3}
   reward_2: {fileID: 674168338714940340, guid: 4ecb9e7fb8fc61a4ba9c5f42bec36aaa, type: 3}
   reward_3: {fileID: 1719039008919548291, guid: ac5ab3fa9bc0403469bcbb3281712ac9, type: 3}
+  movementPattern: 0
+  radius: 5
   spreadAngle: 10
 --- !u!95 &6251655044574044476
 Animator:

@@ -5,10 +5,12 @@ public class BasicEnemy_Straight : Enemy
 
     public override void shoot()
     {
+        if (isBulletBlocked) return;
         if (Time.time > nextFireTime)
         {
             nextFireTime = Time.time + fireRate * 3f;
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+            bullet.transform.localScale = new Vector3(bulletsize, bulletsize, bulletsize);
             Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();
             rbBullet.linearVelocity = Vector2.down * bulletSpeed;
         }

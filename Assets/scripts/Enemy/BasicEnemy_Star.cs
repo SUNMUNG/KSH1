@@ -6,6 +6,7 @@ public class BasicEnemy_Star : Enemy
     public float angleStep = 45f; // 각도 간격 (360도 / numBullets)
     public float randomAngleVariation = 10f; // 각도 랜덤 변형 범위 (±)
 
+    
 
     public override void move()
     {
@@ -18,6 +19,8 @@ public class BasicEnemy_Star : Enemy
     }
     public override void shoot()
     {
+        if (isBulletBlocked) return;
+
         if (Time.time >= nextFireTime)
         {
             nextFireTime = Time.time + fireRate;
@@ -31,6 +34,7 @@ public class BasicEnemy_Star : Enemy
 
                 // 총알 생성
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+                bullet.transform.localScale = new Vector3(bulletsize,bulletsize,bulletsize);
 
                 // Rigidbody2D를 통해 총알 속도 설정
                 Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();

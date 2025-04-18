@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private float nextFireTime = 0f;
     private Coroutine powerUpCoroutine;
     public int Hitnumber=0;
+    public int Ult = 0;
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
@@ -29,11 +30,13 @@ public class PlayerController : MonoBehaviour
         Collider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         SetCamPos();
+        InvokeRepeating("naturalUltcharge", 0f, 30f);
     }
 
     void Update()
     {
         PlayerMove();
+        PlayerUlt();
         ShootBullet();
     }
 
@@ -118,6 +121,35 @@ public class PlayerController : MonoBehaviour
                     break;
             }
         }
+        
+    }
+    void PlayerUlt()
+    {
+
+        if (Input.GetKeyDown(KeyCode.LeftControl) && Ult >= 100)
+{
+            GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+
+            foreach (GameObject bullet in bullets)
+            {
+                Destroy(bullet);
+            }
+
+            // 탄막 생성 차단 시작
+            Enemy.isBulletBlocked = true;
+            Invoke("UnblockBullets", 2f); // 1초 후 다시 풀림
+
+            Ult = 0;
+        }
+    }
+    // 이 메서드는 위에 같이 있는 클래스 안에 있어야 함
+    void UnblockBullets()
+    {
+        Enemy.isBulletBlocked = false;
+    }
+    void naturalUltcharge()
+    {
+        Ult += 25;
     }
 
     void ShootSingleBullet()

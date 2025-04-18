@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Unity.VisualScripting;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,10 +11,14 @@ public class UIManager : MonoBehaviour
     public GameObject settingMenu;
     public Image[] heartImages; // 하트 이미지들을 담을 배열
     public Image[] starImages;
+    public Image[] ultImages;
+    public Sprite fullUlt; 
+    public Sprite emptyUlt;
     public Sprite fullHeart;     // 꽉 찬 하트 이미지
     public Sprite emptyHeart;  // 빈 하트 이미지
     public Sprite fullStar;
     public Sprite emptyStar;
+    public TMP_Text Ult_t;
     public PlayerController playerController; // PlayerController를 참조
     public GameManager gameManager;
 
@@ -110,6 +116,7 @@ public class UIManager : MonoBehaviour
     }
     private void Start()
     {
+        Time.timeScale = 1f;
         // 초기 HP 값을 기반으로 하트 업데이트
         UpdateHearts();
     }
@@ -125,6 +132,7 @@ public class UIManager : MonoBehaviour
         }
         // HP 값이 변경될 때마다 하트를 업데이트
         UpdateHearts();
+        UpdateUlt();
         EndGameResult();
     }
 
@@ -145,6 +153,20 @@ public class UIManager : MonoBehaviour
             {
                 heartImages[i].sprite = emptyHeart;  // 빈 하트
             }
+        }
+    }
+    private void UpdateUlt()
+    {
+        if (playerController == null) return;
+
+        int currentUlt = playerController.Ult;
+        Ult_t.text = currentUlt.ToString()+"%";
+        if(currentUlt >= 100) {
+            ultImages[0].sprite = fullUlt;
+        }
+        else
+        {
+            ultImages[0].sprite = emptyUlt;
         }
     }
 
