@@ -593,10 +593,14 @@ MonoBehaviour:
   settingMenu: {fileID: 0}
   heartImages: []
   starImages: []
+  ultImages: []
+  fullUlt: {fileID: 0}
+  emptyUlt: {fileID: 0}
   fullHeart: {fileID: 0}
   emptyHeart: {fileID: 0}
   fullStar: {fileID: 0}
   emptyStar: {fileID: 0}
+  Ult_t: {fileID: 0}
   playerController: {fileID: 0}
   gameManager: {fileID: 0}
 --- !u!4 &297282342
@@ -2827,6 +2831,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 1440121595}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 297282340}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

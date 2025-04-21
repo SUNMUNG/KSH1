@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;  // TextMesh Pro를 사용하기 위한 네임스페이스 추가
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,9 +24,10 @@ public class GameManager : MonoBehaviour
     private float spawnY = 6f;
     private float nextSpawnTime;
     public int waveCount = 0; // 웨이브 카운트 추가
+    public string stageName;
     private int enemiesSpawnedInWave = 0; // 현재 웨이브에 스폰된 적의 수
     private int enemiesInWave = 10; // 한 웨이브마다 스폰할 적의 수
-    private bool isStageClear = false; // 스테이지 클리어 확인용
+    public bool isStageClear = false; // 스테이지 클리어 확인용
 
     void UpdateScore()
     {
@@ -46,7 +48,7 @@ public class GameManager : MonoBehaviour
             if (enemyPrefab != null && enemiesSpawnedInWave < enemiesInWave)
             {
                 // 랜덤 X 좌표 계산
-                float randomX = Random.Range(-7f, 7f); // X 좌표 랜덤
+                float randomX = UnityEngine.Random.Range(-7f, 7f); // X 좌표 랜덤
 
                 // Y 좌표는 항상 일정하게 고정
                 Vector2 spawnPosition = new Vector2(randomX, spawnY);
@@ -91,18 +93,18 @@ public class GameManager : MonoBehaviour
             if (isPrefab7Exists)
             {
                 // "Stage1_enemyPrefab7"이 이미 존재하면, 나머지 프리팹 중에서 랜덤 선택
-                selectedPrefab = enemyPrefabs[Random.Range(0, 2)];
+                selectedPrefab = enemyPrefabs[UnityEngine.Random.Range(0, 2)];
                 Debug.Log("프리팹이 이미 존재합니다.");// Stage1_enemyPrefab3, Stage1_enemyPrefab6 중 하나
             }
             else
             {
                 // 7번 프리팹을 포함한 모든 프리팹 중에서 랜덤 선택
-                selectedPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+                selectedPrefab = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)];
                 Debug.Log("프리팹이 이미 존재하지않습니다.");
             }
 
             // 랜덤 X 좌표
-            float randomX = Random.Range(-6f, 6f);
+            float randomX = UnityEngine.Random.Range(-6f, 6f);
             Vector2 spawnPosition = new Vector2(randomX, spawnY);
 
             // 생성
@@ -112,7 +114,7 @@ public class GameManager : MonoBehaviour
             Enemy enemyScript = enemy.GetComponent<Enemy>();
             if (enemyScript != null)
             {
-                int patternIndex = Random.Range(0, 4); // 0~3
+                int patternIndex = UnityEngine.Random.Range(0, 4); // 0~3
                 enemyScript.movementPattern = (Enemy.MovementPattern)patternIndex;
 
                 // 탄막도 shoot 오버라이드해서 사용 가능
@@ -134,9 +136,11 @@ public class GameManager : MonoBehaviour
     void SpawnEnemy_Stage3()
     {
 
+
     }
     void SpawnEnemy_Stage4()
     {
+
 
     }
 
@@ -148,7 +152,7 @@ public class GameManager : MonoBehaviour
         GameObject[] enemyPrefabs = new GameObject[] { Stage1_enemyPrefab1, Stage1_enemyPrefab2, Stage1_enemyPrefab3 };
 
         // 랜덤 인덱스 생성 (0부터 enemyPrefabs.Length-1까지)
-        int randomIndex = Random.Range(0, enemyPrefabs.Length);
+        int randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
 
         // 랜덤으로 선택된 적 프리팹 반환
         return enemyPrefabs[randomIndex];

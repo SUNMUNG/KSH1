@@ -2,67 +2,88 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Unity.VisualScripting;
 using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     public GameObject stageMenu;
     public GameObject settingMenu;
-    public Image[] heartImages; // 하트 이미지들을 담을 배열
+    public Image[] heartImages;
     public Image[] starImages;
     public Image[] ultImages;
-    public Sprite fullUlt; 
+    public Sprite fullUlt;
     public Sprite emptyUlt;
-    public Sprite fullHeart;     // 꽉 찬 하트 이미지
-    public Sprite emptyHeart;  // 빈 하트 이미지
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
     public Sprite fullStar;
     public Sprite emptyStar;
     public TMP_Text Ult_t;
-    public PlayerController playerController; // PlayerController를 참조
+    public PlayerController playerController;
     public GameManager gameManager;
 
-   
-    public void ExitGame()
+
+    private void Start()
     {
-        // 게임 종료
-
-        EditorApplication.isPlaying = false;  // 에디터에서 실행 중일 때 게임을 종료
-
-            Application.Quit();  // 빌드된 게임에서 게임 종료
+        Time.timeScale = 1f;
+        UpdateHearts();
 
     }
+
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (Time.timeScale == 1f)
+                SettingPauseGame();
+            else
+                SettingResumeGame();
+        }
+
+        UpdateHearts();
+        UpdateUlt();
+   
+    }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
     public void Returntomenu()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
+
     public void PlayStageStart(string name)
     {
         Debug.Log(name + "을 불러옵니다.");
         SceneManager.LoadScene(name);
     }
+
     public void StageReturn(Button button)
     {
         string Stage_name = button.name;
-
         PlayStageStart(Stage_name);
     }
+
     public void SettingMenuOpen()
     {
         SceneManager.LoadScene("SettingMenu");
     }
+
     public void StageMenuOpen()
     {
-
         if (stageMenu != null)
-        {
             stageMenu.SetActive(true);
-        }
         else
-        {
             Debug.LogWarning("StageMenu 오브젝트를 찾을 수 없습니다!");
-        }
     }
 
     public void RetryStage()
@@ -76,16 +97,15 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("게임을 일시중지합니다");
         Time.timeScale = 0f;
-       // EditorApplication.isPaused = true;
     }
+
     public void SettingPauseGame()
     {
         PauseGame();
         if (settingMenu != null)
-        {
             settingMenu.SetActive(true);
-        }
-        else Debug.LogWarning("settingMenu 오브젝트를 찾을 수 없습니다!");
+        else
+            Debug.LogWarning("settingMenu 오브젝트를 찾을 수 없습니다!");
     }
 
     public void ResumeGame()
@@ -93,98 +113,58 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
         Debug.Log("게임을 재개합니다.");
     }
+
     public void SettingResumeGame()
     {
         ResumeGame();
         if (settingMenu != null)
-        {
             settingMenu.SetActive(false);
-        }
-        else Debug.LogWarning("settingMenu 오브젝트를 찾을 수 없습니다!");
+        else
+            Debug.LogWarning("settingMenu 오브젝트를 찾을 수 없습니다!");
     }
+
     public void StageMenuClose()
     {
-
         if (stageMenu != null)
-        {
             stageMenu.SetActive(false);
-        }
         else
-        {
             Debug.LogWarning("StageMenu 오브젝트를 찾을 수 없습니다!");
-        }
-    }
-    private void Start()
-    {
-        Time.timeScale = 1f;
-        // 초기 HP 값을 기반으로 하트 업데이트
-        UpdateHearts();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (Time.timeScale == 1f)
-            {
-                SettingPauseGame();
-             } else SettingResumeGame();
-        }
-        // HP 값이 변경될 때마다 하트를 업데이트
-        UpdateHearts();
-        UpdateUlt();
-        EndGameResult();
-    }
-
-    // 하트 이미지를 현재 HP에 맞게 업데이트하는 메소드
     private void UpdateHearts()
     {
-        if (playerController == null) return;  
+        if (playerController == null) return;
 
-        float currentHP = playerController.hp ;  // PlayerController에서 HP 값 가져오기
-
+        float currentHP = playerController.hp;
         for (int i = 0; i < heartImages.Length; i++)
         {
-            if (i < currentHP)
-            {
-                heartImages[i].sprite = fullHeart;  // 꽉 찬 하트
-            }
-            else
-            {
-                heartImages[i].sprite = emptyHeart;  // 빈 하트
-            }
+            heartImages[i].sprite = (i < currentHP) ? fullHeart : emptyHeart;
         }
     }
+
     private void UpdateUlt()
     {
         if (playerController == null) return;
 
         int currentUlt = playerController.Ult;
-        Ult_t.text = currentUlt.ToString()+"%";
-        if(currentUlt >= 100) {
-            ultImages[0].sprite = fullUlt;
-        }
-        else
-        {
-            ultImages[0].sprite = emptyUlt;
-        }
+        Ult_t.text = currentUlt + "%";
+        ultImages[0].sprite = (currentUlt >= 100) ? fullUlt : emptyUlt;
     }
 
     private void EndGameResult()
     {
-        if (gameManager == null)return;  
+        if (gameManager == null || SaveManager.instance == null) return;
 
-        int Starcount = gameManager.Starcount;  
+        int starCount = gameManager.Starcount;
+        string stageName = SceneManager.GetActiveScene().name;
 
-        for(int i = 0; i < starImages.Length; i++)
+        SaveManager.instance.SetStageStar(stageName, starCount);
+
+        for (int i = 0; i < starImages.Length; i++)
         {
-            if (i < Starcount)
-            {
-                starImages[i].sprite = fullStar;
-            }
+            starImages[i].sprite = (i < starCount) ? fullStar : emptyStar;
         }
 
-        
+        Debug.Log($"[Result] Stage {stageName} Clear - Stars: {starCount}");
     }
-    
 }
