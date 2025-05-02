@@ -33,7 +33,7 @@ public class SaveManager : MonoBehaviour
     private string SavePath => Application.persistentDataPath + "/save.json";
 
     public GameSaveData saveData = new GameSaveData();
-
+    
     public void Save()
     {
         string json = JsonUtility.ToJson(saveData, true);

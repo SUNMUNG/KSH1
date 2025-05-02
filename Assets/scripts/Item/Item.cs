@@ -32,7 +32,7 @@ public class Item : MonoBehaviour
     }
 
     public void movedown()
-    {
+    {   
         // Y축만 이동시키고 X축은 고정
         transform.position += (Vector3)Vector2.down * speed * Time.deltaTime;
     }
