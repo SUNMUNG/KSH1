@@ -2,52 +2,52 @@ using UnityEngine;
 
 public class BasicEnemy_Circle : Enemy
 {
+    public int bulletCount = 20;  // í•œ ë²ˆ ë°œì‚¬í•  ì´ì•Œ ê°œìˆ˜
+    public float radius_c = 5f;   // ì›í˜• íŒ¨í„´ì˜ ë°˜ì§€ë¦„ í¬ê¸°
+    public float angleStep;       // ê°ë„ ê°„ê²©
+    public float randomAngleOffset = 10f; // ê°ë„ì— ëœë¤ê°’ì„ ë”í•´ ì•½ê°„ ë‹¤ë¥¸ ìœ„ì¹˜ì—ì„œ ë°œì‚¬
 
-    public int bulletCount = 20;  // ÇÑ ¹ø¿¡ ¹ß»çÇÒ ÅºÈ¯ÀÇ °³¼ö
-    public float radius_c = 5f;     // ÅºÈ¯ÀÌ ÆÛÁö´Â ¿øÀÇ ¹İÁö¸§
-    public float angleStep;     // °¢µµ °£°İ
-    public float randomAngleOffset = 10f; // °¢µµ¿¡ ·£´ı ¿ÀÇÁ¼ÂÀ» ÁÖ¾î ¸Å¹ø ´Ù¸¥ À§Ä¡¿¡¼­ ¹ß»ç
-
-    private void Start()
+    private new void Start()
     {
         base.Start();
-        angleStep = 360f / bulletCount;  // °¢µµ¸¦ ÀÏÁ¤ÇÏ°Ô ³ª´©±â
+        angleStep = 360f / bulletCount;  // ê°ë„ë¥¼ ê· ë“±í•˜ê²Œ ë‚˜ëˆ„ê¸°
     }
+
     private void Update()
     {
         if (Hp > 0)
         {
             shoot();
         }
-        
     }
+
     public override void shoot()
     {
         if (isBulletBlocked) return;
         if (Time.time >= nextFireTime)
         {
-            nextFireTime = Time.time + fireRate;  // ÁÖ±âÀûÀ¸·Î ¹ß»ç
+            nextFireTime = Time.time + fireRate;  // ë‹¤ìŒ ë°œì‚¬ ì‹œê°„ ì„¤ì •
 
             for (int i = 0; i < bulletCount; i++)
             {
-                // ¿øÇüÀ¸·Î ¹ß»çÇÒ °¢µµ¸¦ °è»ê
+                // ê¸°ë³¸ ë°œì‚¬ ê°ë„ ê³„ì‚°
                 float angle = angleStep * i;
 
-                // °¢µµ¿¡ ·£´ı ¿ÀÇÁ¼ÂÀ» Ãß°¡ÇÏ¿© ¸Å¹ø ´Ù¸¥ À§Ä¡¿¡¼­ ¹ß»çµÇµµ·Ï ¼³Á¤
+                // ê°ë„ì— ëœë¤ê°’ì„ ë”í•´ ì•½ê°„ ë‹¤ë¥¸ ìœ„ì¹˜ì—ì„œ ë°œì‚¬ë˜ë„ë¡ í•¨
                 float randomOffset = Random.Range(-randomAngleOffset, randomAngleOffset);
                 angle += randomOffset;
 
-                // °¢µµ¸¦ ¶óµğ¾È °ªÀ¸·Î º¯È¯
+                // ê°ë„ë¥¼ ë¼ë””ì•ˆìœ¼ë¡œ ë³€í™˜
                 float angleRad = angle * Mathf.Deg2Rad;
 
-                // ÅºÈ¯ÀÇ ¹æÇâÀ» °è»ê
+                // ì›í˜• íŒ¨í„´ì˜ ì¢Œí‘œ ê³„ì‚°
                 float x = Mathf.Cos(angleRad) * radius_c;
                 float y = Mathf.Sin(angleRad) * radius_c;
 
-                // ÅºÈ¯ÀÇ ¹æÇâÀ» ¼³Á¤
+                // ì›í˜• íŒ¨í„´ì˜ ë°©í–¥ ì„¤ì •
                 Vector3 bulletDirection = new Vector3(x, y, 0).normalized;
 
-                // ÅºÈ¯À» »ı¼ºÇÏ°í ¹ß»ç
+                // ì›í˜• íŒ¨í„´ìœ¼ë¡œ ë°œì‚¬
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
                 bullet.transform.localScale = new Vector3(bulletsize, bulletsize, bulletsize);
                 bullet.GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * bulletSpeed;

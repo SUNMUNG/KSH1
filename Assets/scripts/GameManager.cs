@@ -221,7 +221,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        StageSpawnSelect();
+       // StageSpawnSelect();
         UpdateScore();
         // 게임 오버 체크
         CheckGameOver();
