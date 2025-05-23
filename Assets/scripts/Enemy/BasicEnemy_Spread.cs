@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class BasicEnemy_Spread: Enemy
 {
-    public float waveAmplitude = 0.5f;  // ÆÄµ¿ÀÇ Å©±â
-    public float waveFrequency = 1f;    // ÆÄµ¿ÀÇ ÁÖ±â
+    public float waveAmplitude = 0.5f;  // ï¿½Äµï¿½ï¿½ï¿½ Å©ï¿½ï¿½
+    public float waveFrequency = 1f;    // ï¿½Äµï¿½ï¿½ï¿½ ï¿½Ö±ï¿½
 
     public override void shoot()
     {
@@ -13,18 +13,18 @@ public class BasicEnemy_Spread: Enemy
         {
             nextFireTime = Time.time + fireRate;
 
-            // ÃÑ¾Ë »ý¼º
+            // ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
             bullet.transform.localScale = new Vector3(bulletsize, bulletsize, bulletsize);
 
-            // ÆÄµ¿ È¿°ú¸¦ À§ÇÑ XÃà À§Ä¡ °è»ê
+            // ï¿½Äµï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Xï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½
             float waveOffset = Mathf.Sin(Time.time * waveFrequency) * waveAmplitude;
 
-            // Rigidbody2D¸¦ ÅëÇØ ÃÑ¾Ë ¼Óµµ ¼³Á¤
+            // Rigidbody2Dï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
             Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();
             if (rbBullet != null)
             {
-                rbBullet.linearVelocity = new Vector2(waveOffset, -1) * bulletSpeed;  // XÃà ÆÄµ¿ + YÃà ¾Æ·¡·Î ¹ß»ç
+                rbBullet.linearVelocity = new Vector2(waveOffset, -1) * bulletSpeed;  // Xï¿½ï¿½ ï¿½Äµï¿½ + Yï¿½ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
             }
         }
     }
@@ -32,7 +32,7 @@ public class BasicEnemy_Spread: Enemy
     {
         if (transform.position.y > 4f)
         {
-            // YÃàÀ¸·Î ³»·Á¿À±â
+            // Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             transform.position += Vector3.down * speed * Time.deltaTime;
         }
     }

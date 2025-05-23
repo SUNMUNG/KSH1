@@ -18,7 +18,7 @@ public class BasicEnemy_Straight : Enemy
 
     public override void move()
     {
-        // YÃà¸¸ ÀÌµ¿½ÃÅ°°í XÃàÀº °íÁ¤
+        // Yï¿½à¸¸ ï¿½Ìµï¿½ï¿½ï¿½Å°ï¿½ï¿½ Xï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         transform.position += (Vector3)Vector2.down * speed * Time.deltaTime;
 
     }

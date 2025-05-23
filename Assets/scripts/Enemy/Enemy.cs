@@ -31,12 +31,13 @@ public class Enemy : MonoBehaviour
 
         if (Hp <= 0)
         {
-            //Æø¹ß ¾Ö´Ï¸ÞÀÌ¼Çµ¿¾È ³²¾ÆÀÖ´Â ÄÝ¶óÀÌ´õ°¡ ÃÑ¾ËÀ» ¸·À»¼öÀÖÀ¸¹Ç·Î
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼Çµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½
             if (enemyCollider != null)
                 enemyCollider.enabled = false;
             reward();
-            animator.SetBool("isdie",true); //¾Ö´Ï¸ÞÀÌ¼Ç Æ®¸®°Å
-            Destroy(gameObject,1f); //enemy °ÔÀÓ¿ÀºêÁ§Æ® Á¦°Å;
+            animator.SetBool("isdie",true); //ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.sfxExplosion);
+            Destroy(gameObject,1f); //enemy ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½;
         }
         
     }
@@ -54,14 +55,14 @@ public class Enemy : MonoBehaviour
 
     public virtual void reward()
     {
-        // ±âº» º¸»óÀº Ç×»ó »ý¼º
+        // ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×»ï¿½ ï¿½ï¿½ï¿½ï¿½
         GameObject reward1 = Instantiate(reward_1, transform.position, Quaternion.identity);
         if (reward1 != null)
         {
             Debug.Log("Reward 1 created successfully.");
         }
 
-        // È®·ü·Î reward_2 »ý¼º (¿¹: 30% È®·ü)
+        // È®ï¿½ï¿½ï¿½ï¿½ reward_2 ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½: 30% È®ï¿½ï¿½)
         float chance2 = Random.Range(0f, 1f);
         if (chance2 <= 0.3f)
         {
@@ -69,7 +70,7 @@ public class Enemy : MonoBehaviour
             Debug.Log("Reward 2 created!");
         }
 
-        // È®·ü·Î reward_3 »ý¼º (¿¹: 15% È®·ü)
+        // È®ï¿½ï¿½ï¿½ï¿½ reward_3 ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½: 15% È®ï¿½ï¿½)
         float chance3 = Random.Range(0f, 1f);
         if (chance3 <= 0.15f)
         {
@@ -79,16 +80,16 @@ public class Enemy : MonoBehaviour
     }
     public enum MovementPattern
     {
-        Horizontal,  // ¿ÞÂÊ¿¡¼­ ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿
-        Vertical,    // À§¿¡¼­ ¾Æ·¡·Î ÀÌµ¿
-        Diagonal,    // ´ë°¢¼± ¹æÇâÀ¸·Î ÀÌµ¿
-        Circular     // ¿øÇü ÆÐÅÏ
+        Horizontal,  // ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+        Vertical,    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+        Diagonal,    // ï¿½ë°¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+        Circular     // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
-    public MovementPattern movementPattern;  // ÀÌµ¿ ÆÐÅÏ
-    public float radius = 5f;  // ¿øÇü ÆÐÅÏÀ» À§ÇÑ ¹ÝÁö¸§
+    public MovementPattern movementPattern;  // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
+    public float radius = 5f;  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    private float timer = 0f;  // ½Ã°£ ±â¹ÝÀ¸·Î ÆÐÅÏÀ» Á¦¾îÇÏ´Â Å¸ÀÌ¸Ó
+    private float timer = 0f;  // ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ Å¸ï¿½Ì¸ï¿½
 
     void Update()
     {
@@ -109,25 +110,25 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // ¼öÆò ÀÌµ¿
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
     void MoveHorizontally()
     {
         transform.position += Vector3.right * speed * Time.deltaTime;
     }
 
-    // ¼öÁ÷ ÀÌµ¿
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
     void MoveVertically()
     {
         transform.position += Vector3.down * speed * Time.deltaTime;
     }
 
-    // ´ë°¢¼± ÀÌµ¿
+    // ï¿½ë°¢ï¿½ï¿½ ï¿½Ìµï¿½
     void MoveDiagonally()
     {
         transform.position += new Vector3(1, -1, 0) * speed * Time.deltaTime;
     }
     
-    // ¿øÇü ÆÐÅÏÀ¸·Î ÀÌµ¿
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
     void MoveInCircle()
     {
         timer += Time.deltaTime;

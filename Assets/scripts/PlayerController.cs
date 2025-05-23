@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && Time.time > nextFireTime)
         {
             nextFireTime = Time.time + fireRate; // 한번만 갱신되도록 위치 변경
-
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.sfxShoot);
             switch (power)
             {
                 case 0:
@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
             {
                 Destroy(bullet);
             }
-
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.sfxItem_Ult_used);
             // 탄막 생성 차단 시작
             Enemy.isBulletBlocked = true;
             Invoke("UnblockBullets", 2f); // 1초 후 다시 풀림
@@ -212,6 +212,7 @@ public class PlayerController : MonoBehaviour
         Hitnumber++;
         if (Collider != null)
         {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.sfxHit);
             Collider.enabled = false;
             Debug.Log("피격확인 무적시간 시작");
             StartCoroutine(BlinkSprite(2f));

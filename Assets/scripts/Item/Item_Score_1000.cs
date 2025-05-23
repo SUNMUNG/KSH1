@@ -11,10 +11,12 @@ public class Item_Score_1000 : Item
         if (gameManager == null)
         {
             Debug.LogError("GameManager instance is not found.");
-            return;  // GameManager°¡ ¾ø´Ù¸é ´õ ÀÌ»ó ÁøÇàÇÏÁö ¾ÊÀ½
+            return;  // GameManagerï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
+        
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.sfxItem_Score_Medium);
 
-        // Á¡¼ö Ãß°¡
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
         gameManager.score += 1000;
         Debug.Log("Score added: " + gameManager.score);
     }

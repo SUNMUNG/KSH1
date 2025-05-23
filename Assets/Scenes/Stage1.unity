@@ -1097,7 +1097,7 @@ GameObject:
   - component: {fileID: 332797663}
   - component: {fileID: 332797662}
   m_Layer: 5
-  m_Name: EffectSound_Slider
+  m_Name: SFXVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2090,7 +2090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 696993712}
   m_Layer: 5
-  m_Name: Fill Area
+  m_Name: SFXVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2729,7 +2729,7 @@ GameObject:
   - component: {fileID: 976688136}
   - component: {fileID: 976688135}
   m_Layer: 5
-  m_Name: Sound_Slider
+  m_Name: BGMVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2829,7 +2829,7 @@ GameObject:
   - component: {fileID: 1000569466}
   - component: {fileID: 1000569465}
   m_Layer: 5
-  m_Name: Background
+  m_Name: SFXVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2904,7 +2904,7 @@ GameObject:
   - component: {fileID: 1062067020}
   - component: {fileID: 1062067019}
   m_Layer: 5
-  m_Name: Background
+  m_Name: BGMVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4806,7 +4806,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1864909037}
   m_Layer: 5
-  m_Name: Fill Area
+  m_Name: BGMVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4844,7 +4844,7 @@ GameObject:
   - component: {fileID: 1875123876}
   - component: {fileID: 1875123875}
   m_Layer: 5
-  m_Name: Fill
+  m_Name: BGMVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5266,7 +5266,7 @@ GameObject:
   - component: {fileID: 2045810735}
   - component: {fileID: 2045810734}
   m_Layer: 5
-  m_Name: Fill
+  m_Name: SFXVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5819,6 +5819,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2092158495649398707, guid: 8aca6de525b46824a8fe85313e8aa1d5, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2092158495649398707, guid: 8aca6de525b46824a8fe85313e8aa1d5, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6590007466210596570, guid: 8aca6de525b46824a8fe85313e8aa1d5, type: 3}
       propertyPath: m_Radius
       value: 0.025
@@ -5878,6 +5886,10 @@ PrefabInstance:
     - target: {fileID: 8558587809866773982, guid: 8aca6de525b46824a8fe85313e8aa1d5, type: 3}
       propertyPath: hp
       value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8558587809866773982, guid: 8aca6de525b46824a8fe85313e8aa1d5, type: 3}
+      propertyPath: Ult
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8558587809866773982, guid: 8aca6de525b46824a8fe85313e8aa1d5, type: 3}
       propertyPath: atkpt

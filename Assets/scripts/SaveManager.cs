@@ -22,7 +22,7 @@ public class SaveManager : MonoBehaviour
     public class StageData
     {
         public string stageName;
-        public int stars; // 0~3 »çÀÌ °ª
+        public int stars; // 0~3 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     }
 
     [System.Serializable]
@@ -38,7 +38,7 @@ public class SaveManager : MonoBehaviour
     {
         string json = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(SavePath, json);
-        Debug.Log("ÀúÀå ¿Ï·á!");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½!");
     }
 
     public void Load()
@@ -47,12 +47,12 @@ public class SaveManager : MonoBehaviour
         {
             string json = File.ReadAllText(SavePath);
             saveData = JsonUtility.FromJson<GameSaveData>(json);
-            Debug.Log("ºÒ·¯¿À±â ¿Ï·á!");
+            Debug.Log("ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½!");
         }
         else
         {
-            saveData = new GameSaveData(); // Ã³À½ ½ÇÇà ½Ã
-            Debug.Log("¼¼ÀÌºê ÆÄÀÏ ¾øÀ½. »õ·Î »ı¼º.");
+            saveData = new GameSaveData(); // Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+            Debug.Log("ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.");
         }
     }
 
@@ -66,17 +66,31 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            // ´õ ³ôÀº º° °»½Å¸¸ Çã¿ë
+            // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½
             if (stars > stage.stars)
                 stage.stars = stars;
         }
 
-        Save(); // º¯°æ Áï½Ã ÀúÀå
+        Save(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
     public int GetStageStar(string stageName)
     {
         var stage = saveData.stageDataList.Find(s => s.stageName == stageName);
         return stage != null ? stage.stars : 0;
+    }
+
+    public void ResetGame()
+    {
+        // save.json íŒŒì¼ì´ ì¡´ì¬í•˜ë©´ ì‚­ì œ
+        if (File.Exists(SavePath))
+        {
+            File.Delete(SavePath);
+            Debug.Log("ì €ì¥ íŒŒì¼ì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.");
+        }
+
+        // saveData ì´ˆê¸°í™”
+        saveData = new GameSaveData();
+        Debug.Log("ê²Œì„ ë°ì´í„°ê°€ ì´ˆê¸°í™”ë˜ì—ˆìŠµë‹ˆë‹¤.");
     }
 }

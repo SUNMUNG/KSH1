@@ -2,35 +2,35 @@ using UnityEngine;
 
 public class SpecialEnemy_Spiral : Enemy
 {
-    public float angleIncrement = 10f; // °¢µµ Áõ°¡·®
-    public int numberOfBullets = 30;   // ¹ß»çÇÒ ÃÑ¾ËÀÇ ¼ö
+    public float angleIncrement = 10f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public int numberOfBullets = 30;   // ï¿½ß»ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½
     private float currentAngle = 0f;
-    public float randomAngleVariance = 5f;  // °¢µµ¿¡ ·£´ý º¯È­¸¦ ÁÙ ¹üÀ§ (¡¾°ª)
-    public float randomSpeedVariance = 0.5f; // ¼Óµµ¿¡ ·£´ý º¯È­¸¦ ÁÙ ¹üÀ§ (¡¾°ª)
+    public float randomAngleVariance = 5f;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½)
+    public float randomSpeedVariance = 0.5f; // ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½)
 
     public override void shoot()
     {
         if (isBulletBlocked) return;
         for (int i = 0; i < numberOfBullets; i++)
         {
-            // ·£´ýÇÑ °¢µµ Ãß°¡ (¿ø·¡ °¢µµ¿¡ ¡¾¹üÀ§¸¸Å­ º¯È­¸¦ ÁÜ)
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å­ ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½)
             float randomAngle = Random.Range(-randomAngleVariance, randomAngleVariance);
             float angle = currentAngle + (i * angleIncrement) + randomAngle;
 
-            // ÃÑ¾Ë »ý¼º
+            // ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(new Vector3(0, 0, angle)));
             bullet.transform.localScale = new Vector3(bulletsize, bulletsize, bulletsize);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
             if (rb != null)
             {
-                // ¼Óµµ¿¡ ·£´ýÇÑ º¯È­¸¦ Ãß°¡
+                // ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ ï¿½ß°ï¿½
                 float randomSpeed = Random.Range(-randomSpeedVariance, randomSpeedVariance);
                 rb.linearVelocity = bullet.transform.up * (bulletSpeed + randomSpeed);
             }
         }
 
-        // ³ª¼±ÇüÀ» °è¼Ó ÁøÇàÇÏ±â À§ÇØ °¢µµ ¾÷µ¥ÀÌÆ®
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         currentAngle += angleIncrement;
     }
     private void Update()

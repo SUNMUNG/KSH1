@@ -676,6 +676,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &308373372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 308373374}
+  - component: {fileID: 308373373}
+  m_Layer: 0
+  m_Name: BulletManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &308373373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308373372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 347e40bd646f8894ab847b3f657feb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerBulletPrefab: {fileID: 858914430977409095, guid: f75c7ceed0b4bb54f8d0daab23e13ce4, type: 3}
+  enemyBulletPrefab: {fileID: 1015152902735199718, guid: 787864ccf3b1a9e499fc335099b91b0b, type: 3}
+  poolSize: 20
+--- !u!4 &308373374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308373372}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 93.95588, y: 98.10605, z: -1.8381593}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &415034817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,18 +1673,29 @@ MonoBehaviour:
   bgmSource: {fileID: 0}
   sfxAudioSourcePrefab: {fileID: 1834645053}
   sfxPoolSize: 10
+  masterVolume: 1
+  bgmVolume: 1
+  sfxVolume: 1
+  masterVolumeSlider: {fileID: 0}
+  bgmVolumeSlider: {fileID: 0}
+  sfxVolumeSlider: {fileID: 0}
   bgmMain: {fileID: 8300000, guid: 559c232a43caebe41870ce54786f604e, type: 3}
   bgmStage1: {fileID: 8300000, guid: 89f935015cc98724a862a586326fdf21, type: 3}
   bgmStage2: {fileID: 8300000, guid: 06906d718be5b6a4cb2df8732bf39832, type: 3}
   bgmStage3: {fileID: 8300000, guid: 51a4f1157b7ff1449b5e5cf064d584c7, type: 3}
   bgmStage4: {fileID: 8300000, guid: 1f2ad53bacc245642854dbdc8ea71a9b, type: 3}
   bgmBoss1: {fileID: 8300000, guid: f83a2441f668d1143a6a4636f7086065, type: 3}
-  sfxShoot: {fileID: 0}
-  sfxItem_Power: {fileID: 0}
-  sfxItem_Score: {fileID: 0}
-  sfxItem_Health: {fileID: 0}
-  sfxItem_Ult: {fileID: 0}
-  sfxExplosion: {fileID: 0}
+  sfxUI_Click: {fileID: 8300000, guid: 585cbd3f7e8c1496c9c387f0192a5f37, type: 3}
+  sfxShoot: {fileID: 8300000, guid: c559826dcfff14955bcb6a65f0ac39c8, type: 3}
+  sfxItem_Power: {fileID: 8300000, guid: fc28225342df0407aae453af7703eca9, type: 3}
+  sfxItem_Score_High: {fileID: 8300000, guid: 5671d5483395f4d3abb7d9d0380a5e88, type: 3}
+  sfxItem_Score_Medium: {fileID: 8300000, guid: 23ab272e3ba25450ea31f566494ac12b, type: 3}
+  sfxItem_Score_Low: {fileID: 8300000, guid: 0b5de865586844050b285d4a3fd6b033, type: 3}
+  sfxItem_Health: {fileID: 8300000, guid: 39d592abb1ae943778436337fe27c5d6, type: 3}
+  sfxHit: {fileID: 8300000, guid: b5bf5321322df7d46abe4847d1209e09, type: 3}
+  sfxItem_Ult: {fileID: 8300000, guid: e7307cc4d04404304a7c695958a2648d, type: 3}
+  sfxItem_Ult_used: {fileID: 8300000, guid: 94027795adf3a4bada7b4fa3bc102c8d, type: 3}
+  sfxExplosion: {fileID: 8300000, guid: 0cf45749d239af64b9771f7941c5deca, type: 3}
 --- !u!4 &924861149
 Transform:
   m_ObjectHideFlags: 0
@@ -4098,3 +4156,4 @@ SceneRoots:
   - {fileID: 171396122}
   - {fileID: 924861149}
   - {fileID: 287747613679449113}
+  - {fileID: 308373374}

@@ -7,6 +7,10 @@ public class PowerUpPotion : Item
     protected override void UseItem(PlayerController player)
     {
         player.PowerUp(duration);
-        Debug.Log("PowerUpPotion »ç¿ëµÊ! Áö¼Ó ½Ã°£: " + duration + "ÃÊ");
+        Debug.Log("PowerUpPotion ï¿½ï¿½ï¿½ï¿½! ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½: " + duration + "ï¿½ï¿½");
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.sfxItem_Power);
     }
+
+    
 }

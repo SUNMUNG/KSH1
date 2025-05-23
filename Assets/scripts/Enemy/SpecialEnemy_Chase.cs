@@ -2,45 +2,45 @@ using UnityEngine;
 
 public class SpecialEnemy_Chase : Enemy
 {
-    GameObject player;  // ÇÃ·¹ÀÌ¾î °´Ã¼¸¦ ÂüÁ¶
-    public float spreadAngle = 10f; // ÃÑ¾ËÀÇ ºÒ±ÔÄ¢¼º ¹üÀ§
-    private bool movingRight = true; // ÀÌµ¿ ¹æÇâ (¿À¸¥ÂÊÀ¸·Î ÀÌµ¿ÇÒÁö ¿ÞÂÊÀ¸·Î ÀÌµ¿ÇÒÁö)
-    private float moveBoundaryLeft = -7f; // ¿ÞÂÊ °æ°è
-    private float moveBoundaryRight = 7f; //¿À¸¥ÂÊ °æ°è
+    GameObject player;  // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public float spreadAngle = 10f; // ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½Ò±ï¿½Ä¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private bool movingRight = true; // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½)
+    private float moveBoundaryLeft = -7f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    private float moveBoundaryRight = 7f; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 
 
 
     public override void move()
     {
-        // Y À§Ä¡°¡ 4¿¡ µµ´ÞÇÒ ¶§±îÁö ³»·Á¿É´Ï´Ù.
+        // Y ï¿½ï¿½Ä¡ï¿½ï¿½ 4ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½É´Ï´ï¿½.
         if (transform.position.y > 4f)
         {
-            // YÃàÀ¸·Î ³»·Á¿À±â
+            // Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             transform.position += Vector3.down * speed * Time.deltaTime;
         }
         else
         {
-            // YÃàÀÌ 4¿¡ µµ´ÞÇÏ¸é ÁÂ¿ì ÀÌµ¿ ½ÃÀÛ
+            // Yï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Â¿ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
             if (movingRight)
             {
-                // ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
                 transform.position += Vector3.right * speed * Time.deltaTime;
 
-                // °æ°è¿¡ ´êÀ¸¸é ¹Ý´ë ¹æÇâÀ¸·Î ÀÌµ¿
+                // ï¿½ï¿½è¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
                 if (transform.position.x >= moveBoundaryRight)
                 {
-                    movingRight = false;  // ¿ÞÂÊÀ¸·Î ÀÌµ¿
+                    movingRight = false;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
                 }
             }
             else
             {
-                // ¿ÞÂÊÀ¸·Î ÀÌµ¿
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
                 transform.position += Vector3.left * speed * Time.deltaTime;
 
-                // °æ°è¿¡ ´êÀ¸¸é ¹Ý´ë ¹æÇâÀ¸·Î ÀÌµ¿
+                // ï¿½ï¿½è¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
                 if (transform.position.x <= moveBoundaryLeft)
                 {
-                    movingRight = true;  // ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿
+                    movingRight = true;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
                 }
             }
         }
@@ -51,34 +51,34 @@ public class SpecialEnemy_Chase : Enemy
         player = GameObject.Find("Player");
         if (Time.time > nextFireTime)
         {
-            nextFireTime = Time.time + fireRate;  // ¹ß»ç ÈÄ ´ÙÀ½ ¹ß»ç ½Ã°£ ¼³Á¤
+            nextFireTime = Time.time + fireRate;  // ï¿½ß»ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-            // ÇÃ·¹ÀÌ¾î À§Ä¡ ÃßÀû
+            // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
             Vector3 playerPosition = player.transform.position;
 
-            // ÃÑ¾Ë ¹ß»ç (µÎ¼¼ °³ÀÇ ÃÑ¾Ë ¹ß»ç)
+            // ï¿½Ñ¾ï¿½ ï¿½ß»ï¿½ (ï¿½Î¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ß»ï¿½)
             int bulletCount = 1;
 
             for (int i = 0; i < bulletCount; i++)
             {
-                // ºÒ±ÔÄ¢ÇÑ °¢µµ °è»ê (¹üÀ§ -spreadAngle to +spreadAngle)
+                // ï¿½Ò±ï¿½Ä¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ -spreadAngle to +spreadAngle)
                 float randomAngle = Random.Range(-spreadAngle, spreadAngle);
 
-                // ÇÃ·¹ÀÌ¾î ¹æÇâÀ¸·Î °¢µµ °è»ê
+                // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
                 Vector2 direction = (playerPosition - transform.position).normalized;
 
-                // ºÒ±ÔÄ¢ÇÑ °¢µµ¸¦ Àû¿ëÇÏ¿© ¹æÇâ º¯°æ
+                // ï¿½Ò±ï¿½Ä¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + randomAngle;
 
-                // ¹æÇâ º¤ÅÍ °è»ê
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
                 Vector2 shootDirection = new Vector2(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
 
-                // ÃÑ¾Ë ¹ß»ç
+                // ï¿½Ñ¾ï¿½ ï¿½ß»ï¿½
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
                 bullet.transform.localScale = new Vector3(bulletsize, bulletsize, bulletsize);
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
-                // ÃÑ¾ËÀÇ ¼Óµµ Àû¿ë
+                // ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
                 rb.linearVelocity = shootDirection * bulletSpeed;
             }
         }

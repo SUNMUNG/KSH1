@@ -53,6 +53,7 @@ public class UIManager : MonoBehaviour
 
     public void ExitGame()
     {
+        PlaySFX_Click();
 #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
 #else
@@ -63,12 +64,14 @@ public class UIManager : MonoBehaviour
     public void Returntomenu()
     {
         Time.timeScale = 1f;
+        PlaySFX_Click();
         SceneManager.LoadScene("MainMenu");
     }
 
     public void PlayStageStart(string name)
     {
-        Debug.Log(name + "À» ºÒ·¯¿É´Ï´Ù.");
+        PlaySFX_Click();    
+        Debug.Log(name + "ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½É´Ï´ï¿½.");
         SceneManager.LoadScene(name);
     }
 
@@ -80,27 +83,31 @@ public class UIManager : MonoBehaviour
 
     public void SettingMenuOpen()
     {
+        PlaySFX_Click();
         SceneManager.LoadScene("SettingMenu");
     }
 
     public void StageMenuOpen()
     {
+        PlaySFX_Click();
         if (stageMenu != null)
             stageMenu.SetActive(true);
         else
-            Debug.LogWarning("StageMenu ¿ÀºêÁ§Æ®¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù!");
+            Debug.LogWarning("StageMenu ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
     }
 
     public void RetryStage()
     {
+        PlaySFX_Click();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
-        Debug.Log("ÇØ´ç ½ºÅ×ÀÌÁö¸¦ Àç½ÃÀÛÇÕ´Ï´Ù.");
+        Debug.Log("ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
     }
 
     public void PauseGame()
     {
-        Debug.Log("°ÔÀÓÀ» ÀÏ½ÃÁßÁöÇÕ´Ï´Ù");
+        PlaySFX_Click();
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½");
         Time.timeScale = 0f;
     }
 
@@ -110,13 +117,14 @@ public class UIManager : MonoBehaviour
         if (settingMenu != null)
             settingMenu.SetActive(true);
         else
-            Debug.LogWarning("settingMenu ¿ÀºêÁ§Æ®¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù!");
+            Debug.LogWarning("settingMenu ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
     }
 
     public void ResumeGame()
     {
+        PlaySFX_Click();
         Time.timeScale = 1f;
-        Debug.Log("°ÔÀÓÀ» Àç°³ÇÕ´Ï´Ù.");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ç°³ï¿½Õ´Ï´ï¿½.");
     }
 
     public void SettingResumeGame()
@@ -125,7 +133,14 @@ public class UIManager : MonoBehaviour
         if (settingMenu != null)
             settingMenu.SetActive(false);
         else
-            Debug.LogWarning("settingMenu ¿ÀºêÁ§Æ®¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù!");
+            Debug.LogWarning("settingMenu ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
+    }
+
+    public void ResetGame()
+    {
+        SaveManager.instance.ResetGame();
+        PlaySFX_Click();
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void StageMenuClose()
@@ -133,7 +148,7 @@ public class UIManager : MonoBehaviour
         if (stageMenu != null)
             stageMenu.SetActive(false);
         else
-            Debug.LogWarning("StageMenu ¿ÀºêÁ§Æ®¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù!");
+            Debug.LogWarning("StageMenu ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
     }
 
     private void UpdateHearts()
@@ -164,7 +179,7 @@ public class UIManager : MonoBehaviour
 
         string stageName = SceneManager.GetActiveScene().name;
 
-        // ÀÌ¹Ì ÀúÀåµÈ º°Á¡ÀÌ ÇöÀçº¸´Ù Å©°Å³ª °°À¸¸é ÀúÀåÇÏÁö ¾ÊÀ½
+        // ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½çº¸ï¿½ï¿½ Å©ï¿½Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         int existingStar = SaveManager.instance.GetStageStar(stageName);
         int currentStar = gameManager.Starcount;
 
@@ -173,7 +188,7 @@ public class UIManager : MonoBehaviour
             starImages[i].sprite = (i < currentStar) ? fullStar : emptyStar;
         }
 
-        if (currentStar <= existingStar) return; // ÀÌ¹Ì ÀúÀåµÈ °ÍÀÌ ´õ ÁÁ°Å³ª °°À¸¸é ¹«½Ã
+        if (currentStar <= existingStar) return; // ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         SaveManager.instance.SetStageStar(stageName, currentStar);
         
@@ -184,39 +199,42 @@ public class UIManager : MonoBehaviour
 
     public void SetStageMenuStar()
     {
-        UpdateStageStars("Stage1", 0, 3); // Stage1ÀÇ º°Àº 0 ~ 2¹ø
-        UpdateStageStars("Stage2", 3, 6); // Stage2ÀÇ º°Àº 3 ~ 5¹ø
-        UpdateStageStars("Stage3", 6, 9); // Stage3ÀÇ º°Àº 6 ~ 8¹ø
-        UpdateStageStars("Stage4", 9, 12); // Stage4ÀÇ º°Àº 9 ~ 11¹ø
+        UpdateStageStars("Stage1", 0, 3); // Stage1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 0 ~ 2ï¿½ï¿½
+        UpdateStageStars("Stage2", 3, 6); // Stage2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 3 ~ 5ï¿½ï¿½
+        UpdateStageStars("Stage3", 6, 9); // Stage3ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 6 ~ 8ï¿½ï¿½
+        UpdateStageStars("Stage4", 9, 12); // Stage4ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 9 ~ 11ï¿½ï¿½
+    }
+    public void PlaySFX_Click(){
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.sfxUI_Click);
     }
     private void UpdateStageStars(string stageName, int startIndex, int endIndex)
     {
-        // null Ã¼Å© ¹× ·Î±× Ãß°¡
+        // null Ã¼Å© ï¿½ï¿½ ï¿½Î±ï¿½ ï¿½ß°ï¿½
         if (stageName == null)
         {
-            Debug.LogError("Stage name is null!");  // stageNameÀÌ nullÀÎ °æ¿ì ·Î±×
-            return;  // nullÀÌ¶ó¸é ÇÔ¼ö¸¦ ´õ ÀÌ»ó ½ÇÇàÇÏÁö ¾ÊÀ½
+            Debug.LogError("Stage name is null!");  // stageNameï¿½ï¿½ nullï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Î±ï¿½
+            return;  // nullï¿½Ì¶ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
 
         if (SaveManager.instance == null)
         {
-            Debug.LogError("SaveManager instance is null!");  // SaveManager°¡ nullÀÎ °æ¿ì ·Î±×
-            return;  // instance°¡ nullÀÌ¶ó¸é ´õ ÀÌ»ó ÁøÇàÇÏÁö ¾ÊÀ½
+            Debug.LogError("SaveManager instance is null!");  // SaveManagerï¿½ï¿½ nullï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Î±ï¿½
+            return;  // instanceï¿½ï¿½ nullï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
 
-        // getStarCount¸¦ ±¸ÇÏ´Â ºÎºÐ
+        // getStarCountï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Îºï¿½
         int getStarCount = SaveManager.instance.GetStageStar(stageName);
 
-        // ¿¹¿Ü°¡ ¹ß»ýÇÒ ¼ö ÀÖ´Â ºÎºÐÀ» Ã¼Å©
+        // ï¿½ï¿½ï¿½Ü°ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Îºï¿½ï¿½ï¿½ Ã¼Å©
         if (getStarCount < 0)
         {
             Debug.LogWarning($"Invalid star count for {stageName}: {getStarCount}. Setting to 0.");
-            getStarCount = 0;  // getStarCount°¡ Àß¸øµÈ °ªÀÏ °æ¿ì 0À¸·Î ¼³Á¤
+            getStarCount = 0;  // getStarCountï¿½ï¿½ ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
 
         Debug.Log($"Stage: {stageName}, Star Count: {getStarCount}");
 
-        // ÇØ´ç ½ºÅ×ÀÌÁö¿¡ ´ëÇÑ º° ÀÌ¹ÌÁö¸¦ ¾÷µ¥ÀÌÆ®
+        // ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         for (int i = startIndex; i < endIndex; i++)
         {
             starImages[i].sprite = (i - startIndex < getStarCount) ? fullStar : emptyStar;

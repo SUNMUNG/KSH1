@@ -2,24 +2,25 @@ using UnityEngine;
 
 public class HealthPotion : Item
 {
-    public int healthAmount = 1;  // È¸º¹µÇ´Â HP ¾ç
+    public int healthAmount = 1;  // È¸ï¿½ï¿½ï¿½Ç´ï¿½ HP ï¿½ï¿½
 
     protected override void UseItem(PlayerController player)
     {
-        // HP¸¦ Áõ°¡½ÃÅ´
+        // HPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å´
         if (player.hp >= player.maxHP)
         {
-            Debug.Log("ÀÌ¹Ì ÃÖ´ëÃ¼·Â " + player.maxHP + "ÀÔ´Ï´Ù.");
+            Debug.Log("ï¿½Ì¹ï¿½ ï¿½Ö´ï¿½Ã¼ï¿½ï¿½ " + player.maxHP + "ï¿½Ô´Ï´ï¿½.");
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.sfxItem_Health);
             return;
         }
         else {
             player.hp += healthAmount;
-            // Áõ°¡ÇÑ HP Ãâ·Â
-            Debug.Log(healthAmount + "ÇöÀç Hp: " + player.hp);
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.sfxItem_Health);
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ HP ï¿½ï¿½ï¿½
+            Debug.Log(healthAmount + "ï¿½ï¿½ï¿½ï¿½ Hp: " + player.hp);
         }
         
-
-
         
+
     }
 }

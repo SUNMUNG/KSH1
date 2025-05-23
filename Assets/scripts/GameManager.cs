@@ -1,40 +1,40 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;  // TextMesh Pro¸¦ »ç¿ëÇÏ±â À§ÇÑ ³×ÀÓ½ºÆäÀÌ½º Ãß°¡
+using TMPro;  // TextMesh Proï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ó½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ß°ï¿½
 using UnityEngine.SceneManagement;
 using System;
 
 public class GameManager : MonoBehaviour
 {
-    public PlayerController playerController; // ÇÃ·¹ÀÌ¾î ÄÁÆ®·Ñ·¯
-    public int score = 0; // Á¡¼ö
-    public Text hp; // HP ÅØ½ºÆ®
-    public Text score_T; // Á¡¼ö ÅØ½ºÆ®
+    public PlayerController playerController; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½
+    public int score = 0; // ï¿½ï¿½ï¿½ï¿½
+    public Text hp; // HP ï¿½Ø½ï¿½Æ®
+    public Text score_T; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ®
     public GameObject Stage1_enemyPrefab1;
     public GameObject Stage1_enemyPrefab2;
-    public GameObject Stage1_enemyPrefab3; // Àû ÇÁ¸®ÆÕ
+    public GameObject Stage1_enemyPrefab3; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public GameObject Stage1_enemyPrefab4;
     public GameObject Stage1_enemyPrefab5;
     public GameObject Stage1_enemyPrefab6;
     public GameObject Stage1_enemyPrefab7;
-    public float spawnInterval = 3f; // Àû ½ºÆù °£°Ý
-    public TMP_Text gameOverText; // °ÔÀÓ ¿À¹ö ÅØ½ºÆ®
+    public float spawnInterval = 3f; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public TMP_Text gameOverText; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ®
     public GameObject gameClearUI;
     public int Starcount;
     private float spawnY = 6f;
     private float nextSpawnTime;
-    public int waveCount = 0; // ¿þÀÌºê Ä«¿îÆ® Ãß°¡
+    public int waveCount = 0; // ï¿½ï¿½ï¿½Ìºï¿½ Ä«ï¿½ï¿½Æ® ï¿½ß°ï¿½
     public string stageName;
-    private int enemiesSpawnedInWave = 0; // ÇöÀç ¿þÀÌºê¿¡ ½ºÆùµÈ ÀûÀÇ ¼ö
-    private int enemiesInWave = 10; // ÇÑ ¿þÀÌºê¸¶´Ù ½ºÆùÇÒ ÀûÀÇ ¼ö
-    public bool isStageClear = false; // ½ºÅ×ÀÌÁö Å¬¸®¾î È®ÀÎ¿ë
+    private int enemiesSpawnedInWave = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºê¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    private int enemiesInWave = 10; // ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºê¸¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    public bool isStageClear = false; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ È®ï¿½Î¿ï¿½
 
     void UpdateScore()
     {
         score_T.text = "Score : " + score.ToString();
     }
 
-    // Àû ½ºÆù ¸Þ¼­µå
+    // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     void SpawnEnemy_Stage1()
     {
         if (isStageClear==true)
@@ -43,34 +43,34 @@ public class GameManager : MonoBehaviour
         }
         if (Time.time >= nextSpawnTime)
         {
-            GameObject enemyPrefab = GetRandomEnemyPrefab(); // ·£´ýÀ¸·Î Àû ÇÁ¸®ÆÕ ¼±ÅÃ
+            GameObject enemyPrefab = GetRandomEnemyPrefab(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
             if (enemyPrefab != null && enemiesSpawnedInWave < enemiesInWave)
             {
-                // ·£´ý X ÁÂÇ¥ °è»ê
-                float randomX = UnityEngine.Random.Range(-7f, 7f); // X ÁÂÇ¥ ·£´ý
+                // ï¿½ï¿½ï¿½ï¿½ X ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½
+                float randomX = UnityEngine.Random.Range(-7f, 7f); // X ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½
 
-                // Y ÁÂÇ¥´Â Ç×»ó ÀÏÁ¤ÇÏ°Ô °íÁ¤
+                // Y ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½×»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½
                 Vector2 spawnPosition = new Vector2(randomX, spawnY);
 
-                // Àû »ý¼º
+                // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.Euler(180, 0, 0));
 
-                // ½ºÆùµÈ ÀûÀÇ À§Ä¡¸¦ °­Á¦·Î °íÁ¤
-                enemy.transform.position = new Vector2(randomX, spawnY); // À§Ä¡¸¦ °­Á¦·Î ¼³Á¤
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                enemy.transform.position = new Vector2(randomX, spawnY); // ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 Debug.Log("Spawned Enemy at position: " + enemy.transform.position);
 
-                enemiesSpawnedInWave++; // ÇÑ ¿þÀÌºê¿¡¼­ ½ºÆùµÈ ÀûÀÇ ¼ö Áõ°¡
+                enemiesSpawnedInWave++; // ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºê¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             }
             else if (enemiesSpawnedInWave >= enemiesInWave)
             {
-                // ÇÑ ¿þÀÌºê¿¡¼­ ÀûÀÌ ¸ðµÎ ½ºÆùµÇ¾úÀ» °æ¿ì
+                // ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºê¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
                 Debug.Log("Wave " + waveCount + " Completed!");
-                enemiesSpawnedInWave = 0; // ¿þÀÌºê Ä«¿îÆ® ¸®¼Â
-                waveCount++; // ¿þÀÌºê Áõ°¡
+                enemiesSpawnedInWave = 0; // ï¿½ï¿½ï¿½Ìºï¿½ Ä«ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+                waveCount++; // ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
                 Debug.Log("Wave Count: " + waveCount);
             }
-            nextSpawnTime = Time.time + spawnInterval; // Àû ½ºÆù °£°Ý ¼³Á¤
+            nextSpawnTime = Time.time + spawnInterval; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
     }
     void SpawnEnemy_Stage2()
@@ -79,45 +79,45 @@ public class GameManager : MonoBehaviour
 
         if (Time.time >= nextSpawnTime)
         {
-            // Àû ÇÁ¸®ÆÕ ¹è¿­
+            // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­
             GameObject[] enemyPrefabs = new GameObject[]
             {
             Stage1_enemyPrefab3, Stage1_enemyPrefab6, Stage1_enemyPrefab7
             };
 
-            // 7¹ø ÇÁ¸®ÆÕÀÌ ÀÌ¹Ì Á¸ÀçÇÏ´ÂÁö Ã¼Å©
+            // 7ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ Ã¼Å©
             bool isPrefab7Exists = GameObject.Find("BasicEnemy_Circle(Clone)") != null;
 
-            // 7¹ø ÇÁ¸®ÆÕÀÌ Á¸ÀçÇÏ¸é ´Ù¸¥ ÇÁ¸®ÆÕ ¼±ÅÃ
+            // 7ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             GameObject selectedPrefab;
             if (isPrefab7Exists)
             {
-                // "Stage1_enemyPrefab7"ÀÌ ÀÌ¹Ì Á¸ÀçÇÏ¸é, ³ª¸ÓÁö ÇÁ¸®ÆÕ Áß¿¡¼­ ·£´ý ¼±ÅÃ
+                // "Stage1_enemyPrefab7"ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 selectedPrefab = enemyPrefabs[UnityEngine.Random.Range(0, 2)];
-                Debug.Log("ÇÁ¸®ÆÕÀÌ ÀÌ¹Ì Á¸ÀçÇÕ´Ï´Ù.");// Stage1_enemyPrefab3, Stage1_enemyPrefab6 Áß ÇÏ³ª
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");// Stage1_enemyPrefab3, Stage1_enemyPrefab6 ï¿½ï¿½ ï¿½Ï³ï¿½
             }
             else
             {
-                // 7¹ø ÇÁ¸®ÆÕÀ» Æ÷ÇÔÇÑ ¸ðµç ÇÁ¸®ÆÕ Áß¿¡¼­ ·£´ý ¼±ÅÃ
+                // 7ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 selectedPrefab = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)];
-                Debug.Log("ÇÁ¸®ÆÕÀÌ ÀÌ¹Ì Á¸ÀçÇÏÁö¾Ê½À´Ï´Ù.");
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
             }
 
-            // ·£´ý X ÁÂÇ¥
+            // ï¿½ï¿½ï¿½ï¿½ X ï¿½ï¿½Ç¥
             float randomX = UnityEngine.Random.Range(-6f, 6f);
             Vector2 spawnPosition = new Vector2(randomX, spawnY);
 
-            // »ý¼º
+            // ï¿½ï¿½ï¿½ï¿½
             GameObject enemy = Instantiate(selectedPrefab, spawnPosition, Quaternion.Euler(180, 0, 0));
 
-            // movementPattern ·£´ý ÁöÁ¤
+            // movementPattern ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             Enemy enemyScript = enemy.GetComponent<Enemy>();
             if (enemyScript != null)
             {
                 int patternIndex = UnityEngine.Random.Range(0, 4); // 0~3
                 enemyScript.movementPattern = (Enemy.MovementPattern)patternIndex;
 
-                // Åº¸·µµ shoot ¿À¹ö¶óÀÌµåÇØ¼­ »ç¿ë °¡´É
+                // Åºï¿½ï¿½ï¿½ï¿½ shoot ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 enemyScript.InvokeRepeating("shoot", 1f, enemyScript.fireRate);
             }
 
@@ -145,36 +145,36 @@ public class GameManager : MonoBehaviour
     }
 
 
-    // ·£´ýÀ¸·Î Àû ÇÁ¸®ÆÕÀ» ¼±ÅÃÇÏ´Â ¸Þ¼­µå
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     GameObject GetRandomEnemyPrefab()
     {
-        // ¸ðµç Àû ÇÁ¸®ÆÕÀ» ¹è¿­¿¡ ´ã¾Æ ·£´ýÀ¸·Î ¼±ÅÃ
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         GameObject[] enemyPrefabs = new GameObject[] { Stage1_enemyPrefab1, Stage1_enemyPrefab2, Stage1_enemyPrefab3 };
 
-        // ·£´ý ÀÎµ¦½º »ý¼º (0ºÎÅÍ enemyPrefabs.Length-1±îÁö)
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (0ï¿½ï¿½ï¿½ï¿½ enemyPrefabs.Length-1ï¿½ï¿½ï¿½ï¿½)
         int randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
 
-        // ·£´ýÀ¸·Î ¼±ÅÃµÈ Àû ÇÁ¸®ÆÕ ¹ÝÈ¯
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ãµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
         return enemyPrefabs[randomIndex];
     }
 
-    // °ÔÀÓ ¿À¹ö Ã¼Å© ¸Þ¼­µå
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å© ï¿½Þ¼ï¿½ï¿½ï¿½
     void CheckGameOver()
     {
         if (playerController.HPOut() <= 0)
         {
-            gameOverText.gameObject.SetActive(true); // °ÔÀÓ ¿À¹ö ÅØ½ºÆ® Ç¥½Ã
-            Time.timeScale = 0; // °ÔÀÓ ¸ØÃß±â
+            gameOverText.gameObject.SetActive(true); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® Ç¥ï¿½ï¿½
+            Time.timeScale = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß±ï¿½
         }
     }
-    // ¸ðµç ÀûÀÌ Á×¾ú´ÂÁö È®ÀÎÇÏ°í, ½ºÅ×ÀÌÁö Å¬¸®¾î ¸Þ½ÃÁö Ãâ·Â
+    // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¾ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     void CheckStageClear()
     {
-        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && waveCount == 3) // ÀûÀÌ ÇÏ³ªµµ ³²Áö ¾Ê¾ÒÀ» ¶§
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && waveCount == 3) // ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾ï¿½ï¿½ï¿½ ï¿½ï¿½
         {
             isStageClear = true;
             gameClearUI.gameObject.SetActive(true);
-            Time.timeScale = 0; // °ÔÀÓ ¸ØÃß±â
+            Time.timeScale = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß±ï¿½
             CheckScoreResult();
         }
     }
@@ -201,31 +201,31 @@ public class GameManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Stage1")
         {
-            SpawnEnemy_Stage1(); // Àû ½ºÆù
+            SpawnEnemy_Stage1(); // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
         else if (SceneManager.GetActiveScene().name == "Stage2")
         {
-            SpawnEnemy_Stage2(); // Àû ½ºÆù
+            SpawnEnemy_Stage2(); // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
         else if (SceneManager.GetActiveScene().name == "Stage3")
         {
-            SpawnEnemy_Stage3(); // Àû ½ºÆù
+            SpawnEnemy_Stage3(); // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
         else if (SceneManager.GetActiveScene().name == "Stage4")
         {
-            SpawnEnemy_Stage4(); // Àû ½ºÆù
+            SpawnEnemy_Stage4(); // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
-        else { Debug.Log("ÇØ´çÇÏ´Â ½ºÅ×ÀÌÁö°¡ ¾ø½À´Ï´Ù"); }
+        else { Debug.Log("ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½"); }
     }
 
 
     void Update()
     {
-       // StageSpawnSelect();
+        StageSpawnSelect();
         UpdateScore();
-        // °ÔÀÓ ¿À¹ö Ã¼Å©
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
         CheckGameOver();
-        // ¸ðµç ÀûÀÌ Á×¾ú´ÂÁö È®ÀÎ (½ºÅ×ÀÌÁö Å¬¸®¾î Ã¼Å©)
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¾ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ Ã¼Å©)
         CheckStageClear();
     }
 }

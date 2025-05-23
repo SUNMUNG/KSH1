@@ -7,6 +7,9 @@ public class UltPotion : Item
     protected override void UseItem(PlayerController player)
     {
         player.Ult += ultamount;
-        Debug.Log("ÇÃ·¹ÀÌ¾îÀÇ ±Ã±Ø±â¼öÄ¡"+ultamount+" Áõ°¡");
+        Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½Ã±Ø±ï¿½ï¿½Ä¡"+ultamount+" ï¿½ï¿½ï¿½ï¿½");
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.sfxItem_Ult);
+
     }
 }

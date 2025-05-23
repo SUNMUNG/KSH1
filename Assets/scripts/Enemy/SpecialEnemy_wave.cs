@@ -2,50 +2,50 @@ using UnityEngine;
 
 public class SpecialEnemy_wave : Enemy
 {
-    public float waveFrequency = 0.5f;   // ÆÄµ¿ ÁÖ±â (½Ã°£´ç ¹ß»ç ºóµµ)
-    public int bulletsPerWave = 8;        // °¢ ÆÄµ¿¿¡¼­ ¹ß»çÇÒ ÃÑ¾ËÀÇ ¼ö (¿øÇü °æ·Î¿¡ µû¶ó)
-    public float waveRadius = 1f;         // ¿øÇü °æ·ÎÀÇ ¹ÝÁö¸§       
-    public float rotationSpeed = 30f;     // ¿øÇü ÆÐÅÏÀÇ È¸Àü ¼Óµµ (µµ/ÃÊ)
-    private float waveTimer = 0f;         // ÆÄµ¿ Å¸ÀÌ¸Ó
-    private float currentRotation = 0f;   // ¿øÇü °æ·ÎÀÇ ÇöÀç È¸Àü °¢µµ
+    public float waveFrequency = 0.5f;   // ï¿½Äµï¿½ ï¿½Ö±ï¿½ (ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½)
+    public int bulletsPerWave = 8;        // ï¿½ï¿½ ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½)
+    public float waveRadius = 1f;         // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½       
+    public float rotationSpeed = 30f;     // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½Óµï¿½ (ï¿½ï¿½/ï¿½ï¿½)
+    private float waveTimer = 0f;         // ï¿½Äµï¿½ Å¸ï¿½Ì¸ï¿½
+    private float currentRotation = 0f;   // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     public override void shoot()
     {
         if (isBulletBlocked) return;
-        // ÆÄµ¿ Å¸ÀÌ¸Ó °»½Å
+        // ï¿½Äµï¿½ Å¸ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
         waveTimer += Time.deltaTime;
 
         if (waveTimer >= waveFrequency)
         {
             waveTimer = 0f;
 
-            // ¿øÇü °æ·Î È¸Àü Ãß°¡
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ß°ï¿½
             currentRotation += rotationSpeed * Time.deltaTime;
 
             for (int i = 0; i < bulletsPerWave; i++)
             {
-                // °¢µµ °è»ê: ¿øÇü °æ·Î¸¦ µû¶ó¼­ °¢µµ¸¦ ³ª´©¾î¼­ ÃÑ¾ËÀ» ¹ß»ç
-                float angle = i * (360f / bulletsPerWave);  // °¢µµ °£°Ý °è»ê
-                float angleInRadians = (angle + currentRotation) * Mathf.Deg2Rad; // È¸Àü°ªÀ» Ãß°¡ÇÏ¿© ÃÑ¾ËÀÇ °¢µµ º¯°æ
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½î¼­ ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
+                float angle = i * (360f / bulletsPerWave);  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+                float angleInRadians = (angle + currentRotation) * Mathf.Deg2Rad; // È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï¿ï¿½ ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-                // ¿øÇü °æ·ÎÀÇ X, Y ÁÂÇ¥ °è»ê (¿øÇüÀ¸·Î ¹ß»ç)
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ X, Y ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½)
                 float xOffset = Mathf.Cos(angleInRadians) * waveRadius;
                 float yOffset = Mathf.Sin(angleInRadians) * waveRadius;
 
-                // ÃÑ¾ËÀÇ ¹ß»ç À§Ä¡¸¦ ¿øÇü °æ·Î¿¡ ¸Â°Ô ¼³Á¤
+                // ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¿ï¿½ ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½
                 Vector3 spawnPosition = new Vector3(firePoint.position.x + xOffset, firePoint.position.y + yOffset, firePoint.position.z);
 
-                // ÃÑ¾Ë »ý¼º
+                // ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½
                 GameObject bullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
                 bullet.transform.localScale = new Vector3(bulletsize, bulletsize, bulletsize);
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
                 if (rb != null)
                 {
-                    // ¿øÇü °æ·Î·Î ¹ß»çµÉ ¹æÇâ
+                    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î·ï¿½ ï¿½ß»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     Vector2 direction = new Vector2(xOffset, yOffset).normalized;
 
-                    // ÃÑ¾Ë ¼Óµµ Àû¿ë (¹æÇâ + ¼Óµµ)
+                    // ï¿½Ñ¾ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ + ï¿½Óµï¿½)
                     rb.linearVelocity = direction * bulletSpeed;
                 }   
             }

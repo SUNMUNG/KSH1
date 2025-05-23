@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class BasicEnemy_Star : Enemy
 {
-    public int numBullets = 8;  // ¹ß»çÇÒ ÃÑ¾Ë °³¼ö
-    public float angleStep = 45f; // °¢µµ °£°Ý (360µµ / numBullets)
-    public float randomAngleVariation = 10f; // °¢µµ ·£´ý º¯Çü ¹üÀ§ (¡¾)
+    public int numBullets = 8;  // ï¿½ß»ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public float angleStep = 45f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (360ï¿½ï¿½ / numBullets)
+    public float randomAngleVariation = 10f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½)
 
     
 
     public override void move()
     {
-        // Y À§Ä¡°¡ 4¿¡ µµ´ÞÇÒ ¶§±îÁö ³»·Á¿É´Ï´Ù.
+        // Y ï¿½ï¿½Ä¡ï¿½ï¿½ 4ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½É´Ï´ï¿½.
         if (transform.position.y > 4f)
         {
-            // YÃàÀ¸·Î ³»·Á¿À±â
+            // Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             transform.position += Vector3.down * speed * Time.deltaTime;
         }
     }
@@ -27,20 +27,20 @@ public class BasicEnemy_Star : Enemy
 
             for (int i = 0; i < numBullets; i++)
             {
-                // ¿ø·¡ÀÇ °¢µµ¿¡ ·£´ý °ªÀ» Ãß°¡
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
                 float angle = i * angleStep + Random.Range(-randomAngleVariation, randomAngleVariation);
 
                 Vector2 direction = new Vector2(Mathf.Sin(Mathf.Deg2Rad * angle), Mathf.Cos(Mathf.Deg2Rad * angle));
 
-                // ÃÑ¾Ë »ý¼º
+                // ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
                 bullet.transform.localScale = new Vector3(bulletsize,bulletsize,bulletsize);
 
-                // Rigidbody2D¸¦ ÅëÇØ ÃÑ¾Ë ¼Óµµ ¼³Á¤
+                // Rigidbody2Dï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
                 Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();
                 if (rbBullet != null)
                 {
-                    rbBullet.linearVelocity = direction * bulletSpeed;  // ¹æÇâ¿¡ ¸Â°Ô ¹ß»ç
+                    rbBullet.linearVelocity = direction * bulletSpeed;  // ï¿½ï¿½ï¿½â¿¡ ï¿½Â°ï¿½ ï¿½ß»ï¿½
                 }
             }
         }
